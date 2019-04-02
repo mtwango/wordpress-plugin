@@ -1,37 +1,37 @@
 {
-  "name": "druidfi/mona-plugin",
-  "type": "composer-plugin",
-  "description": "Mona Composer Plugin for Drupal 7 sites",
-  "minimum-stability": "dev",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Pinchuk Igor",
-      "email": "i.pinchuk.personal@gmail.com"
+    "name": "druidfi/mona-plugin",
+    "type": "composer-plugin",
+    "description": "Mona Composer Plugin for Drupal 7 sites",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pinchuk Igor",
+            "email": "i.pinchuk.personal@gmail.com"
+        },
+        {
+            "name": "Panychev Dmitry",
+            "email": "thor_work@yahoo.com"
+        },
+        {
+            "name": "Druid.fi",
+            "email": "info@druid.fi"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Druidfi\\": "src/"
+        }
     },
-    {
-      "name": "Panychev Dmitry",
-      "email": "thor_work@yahoo.com"
+    "extra": {
+        "class": "Druidfi\\Mona\\Plugin"
     },
-    {
-      "name": "Druid.fi",
-      "email": "info@druid.fi"
+    "require": {
+        "php": "^7.1",
+        "composer-plugin-api": "^1.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "@stable",
+        "composer/composer": "^1.0"
     }
-  ],
-  "autoload": {
-    "psr-4": {
-      "SomeWork\\": "src/"
-    }
-  },
-  "extra": {
-    "class": "SomeWork\\Symlinks\\Plugin"
-  },
-  "require": {
-    "php": ">7.1",
-    "composer-plugin-api": "^1.0"
-  },
-  "require-dev": {
-    "friendsofphp/php-cs-fixer": "@stable",
-    "composer/composer": "^1.0"
-  }
 }

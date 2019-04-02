@@ -1,6 +1,6 @@
 <?php
 
-namespace SomeWork\Symlinks;
+namespace Druidfi\Mona;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;

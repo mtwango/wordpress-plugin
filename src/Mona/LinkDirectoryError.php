@@ -1,6 +1,6 @@
 <?php
 
-namespace SomeWork\Symlinks;
+namespace Druidfi\Mona;
 
 class LinkDirectoryError extends RuntimeException
 {
