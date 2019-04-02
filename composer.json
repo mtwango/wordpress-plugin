@@ -1,7 +1,7 @@
 {
-  "name": "somework/composer-symlinks",
+  "name": "druidfi/mona-plugin",
   "type": "composer-plugin",
-  "description": "Create relative symlinks based on getcwd() and relative data",
+  "description": "Mona Composer Plugin for Drupal 7 sites",
   "minimum-stability": "dev",
   "license": "MIT",
   "authors": [
@@ -12,6 +12,10 @@
     {
       "name": "Panychev Dmitry",
       "email": "thor_work@yahoo.com"
+    },
+    {
+      "name": "Druid.fi",
+      "email": "info@druid.fi"
     }
   ],
   "autoload": {
@@ -23,7 +27,7 @@
     "class": "SomeWork\\Symlinks\\Plugin"
   },
   "require": {
-    "php": ">7.0",
+    "php": ">7.1",
     "composer-plugin-api": "^1.0"
   },
   "require-dev": {
