@@ -55,7 +55,7 @@ class Plugin implements PluginInterface
                     $event
                         ->getIO()
                         ->write(sprintf(
-                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment> <info>OK</info>',
+                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment> <info>[OK]</info>',
                             $symlink->getOriginalLink(),
                             $symlink->getOriginalTarget()
                         ));
@@ -63,16 +63,15 @@ class Plugin implements PluginInterface
                     $event
                         ->getIO()
                         ->write(sprintf(
-                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment>: %s',
+                            '  - Symlink from <comment>%s</comment> to <comment>%s</comment> already exists <info>[OK]</info>',
                             $symlink->getOriginalLink(),
-                            $symlink->getOriginalTarget(),
-                            'Already there <info>OK</info>'
+                            $symlink->getOriginalTarget()
                         ));
                 } catch (Exception $exception) {
                     $event
                         ->getIO()
                         ->writeError(sprintf(
-                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment> - %s',
+                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment> failed: %s <error>[ERROR]</error>',
                             $symlink->getLink(),
                             $symlink->getTarget(),
                             $exception->getMessage()
