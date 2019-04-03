@@ -14,7 +14,6 @@ use Composer\Util\Filesystem;
  *
  * @author  Dmitry Panychev <thor_work@yahoo.com>
  *
- * @package SomeWork\Composer
  */
 class Plugin implements PluginInterface
 {

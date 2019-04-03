@@ -4,10 +4,14 @@ namespace Druidfi\Mona;
 
 use Composer\Script\Event;
 use Composer\Util\Filesystem;
+use Exception;
+use function dirname;
+use function is_array;
+use function is_string;
 
 class SymlinksFactory
 {
-    const PACKAGE_NAME = 'somework/composer-symlinks';
+    const PACKAGE_NAME = 'druidfi/mona-plugin';
 
     const SYMLINKS = 'symlinks';
     const SKIP_MISSED_TARGET = 'skip-missing-target';
@@ -32,10 +36,11 @@ class SymlinksFactory
     }
 
 
-    /**
-     * @throws \Exception
-     * @return Symlink[]
-     */
+  /**
+   * @return Symlink[]
+   * @throws SymlinksException
+   * @throws Exception
+   */
     public function process(): array
     {
         $symlinksData = $this->getSymlinksData();
@@ -63,7 +68,7 @@ class SymlinksFactory
 
     protected function getConfig(string $name, $link = null, $default = false): bool
     {
-        if (\is_array($link) && isset($link[$name])) {
+        if (is_array($link) && isset($link[$name])) {
             return (bool)$link[$name];
         }
 
@@ -78,8 +83,8 @@ class SymlinksFactory
      * @param string       $target
      * @param array|string $linkData
      *
-     * @throws \SomeWork\Symlinks\LinkDirectoryError
-     * @throws \SomeWork\Symlinks\InvalidArgumentException
+     * @throws LinkDirectoryError
+     * @throws InvalidArgumentException
      * @return null|Symlink
      */
     protected function processSymlink(string $target, $linkData)
@@ -120,7 +125,7 @@ class SymlinksFactory
         }
 
         try {
-            $this->fileSystem->ensureDirectoryExists(\dirname($linkPath));
+            $this->fileSystem->ensureDirectoryExists(dirname($linkPath));
         } catch (\RuntimeException $exception) {
             throw new LinkDirectoryError($exception->getMessage(), $exception->getCode(), $exception);
         }
@@ -144,7 +149,7 @@ class SymlinksFactory
     }
 
     /**
-     * @throws \SomeWork\Symlinks\InvalidArgumentException
+     * @throws InvalidArgumentException
      * @return array
      */
     protected function getSymlinksData(): array
@@ -157,7 +162,7 @@ class SymlinksFactory
 
         $configs = $extras[static::PACKAGE_NAME][static::SYMLINKS];
 
-        if (!\is_array($configs)) {
+        if (!is_array($configs)) {
             throw new InvalidArgumentException(sprintf(
                 'The extra.%s.%s setting must be an array.',
                 static::PACKAGE_NAME,
@@ -176,9 +181,9 @@ class SymlinksFactory
     protected function getLink($linkData): string
     {
         $link = '';
-        if (\is_array($linkData)) {
+        if (is_array($linkData)) {
             $link = $linkData['link'] ?? '';
-        } elseif (\is_string($linkData)) {
+        } elseif (is_string($linkData)) {
             $link = $linkData;
         }
         return $link;

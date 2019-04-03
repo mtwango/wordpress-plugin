@@ -1,23 +1,23 @@
-ComposerSymlinks
-=====================
+# Mona Composer Plugin
 
-Its provide a simple Composer script to symlink paths.
+Composer plugin to symlink paths to create Composer based Drupal 7 installation.
 
-Installation
-------------
+See more in Mona repository: https://github.com/druidfi/mona
+
+## Installation
 
 To install the latest stable version of this component, open a console and execute the following command:
 
 ```
-$ composer require somework/composer-symlinks
+$ composer require druidfi/mona-plugin
 ```
 
-Usage
------
+## Usage
 
-### 1. Define symlinks
+### Configuration
 
-Create the symlinks definition adding a `somework/composer-symlinks` section inside the `extra` section of the composer.json file.
+Create the symlinks definition adding a `druidfi/mona-plugin` section inside the `extra` section of the composer.json
+file.
 
 Set `skip-missing-target` to true if we should not throw exception if target path doesn't exists  
 Set `absolute-path` to true if you want to create realpath symlinks  
@@ -30,15 +30,23 @@ For personal configs `link` must be defined
 ```json
 {
     "extra": {
-        "somework/composer-symlinks": {
+        "druidfi/mona-plugin": {
             "symlinks": {
-                "common/upload": "web/upload",
-                "common/static/dest": {
-                    "link": "web/dest",
-                    "skip-missing-target": false,
-                    "absolute-path": true,
-                    "throw-exception": false
-                }
+                "vendor/ckeditor/ckeditor": "public/sites/all/libraries/ckeditor",
+                "vendor/drupal/authorize.php": "public/authorize.php",
+                "vendor/drupal/cron.php": "public/cron.php",
+                "vendor/drupal/index.php": "public/index.php",
+                "vendor/drupal/robots.txt": "public/robots.txt",
+                "vendor/drupal/update.php": "public/update.php",
+                "vendor/drupal/xmlrpc.php": "public/xmlrpc.php",
+                "vendor/drupal/includes": "public/includes",
+                "vendor/drupal/misc": "public/misc",
+                "vendor/drupal/modules": "public/modules",
+                "vendor/drupal/profiles/standard": "public/profiles/standard",
+                "vendor/drupal/themes": "public/themes",
+                "vendor/drupal_modules": "public/sites/all/modules/contrib",
+                "vendor/drupal_themes/omega": "public/sites/all/themes/omega",
+                "vendor/woocommerce/flexslider": "public/sites/all/libraries/flexslider"
             },
             "force-create": false,
             "skip-missing-target": false,
@@ -49,17 +57,15 @@ For personal configs `link` must be defined
 }
 ```
 
-### 3. Execute composer
+### Notes
 
-DO NOT use --no-plugins for composer install or update
+- DO NOT use --no-plugins for composer install or update
 
-License
--------
+## Forked from
 
-This component is under the MIT license. See the complete license in the [LICENSE] file.
+This plugin is based on [ComposerSymlinks](https://github.com/somework/composer-symlinks) and modified to be used with
+Drupal 7 Composer based installations. Mona Composer Plugin is released under same license.
 
+## License
 
-Reporting an issue or a feature request
----------------------------------------
-
-Issues and feature requests are tracked in the [Github issue tracker].
+This component is under the MIT license. See the complete license in the [LICENSE](LICENSE) file.

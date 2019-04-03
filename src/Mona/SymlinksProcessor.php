@@ -3,6 +3,8 @@
 namespace Druidfi\Mona;
 
 use Composer\Util\Filesystem;
+use Exception;
+use function is_dir;
 
 class SymlinksProcessor
 {
@@ -19,14 +21,14 @@ class SymlinksProcessor
     /**
      * @param Symlink $symlink
      *
-     * @throws \SomeWork\Symlinks\RuntimeException
+     * @throws RuntimeException
      * @return bool
      */
     public function processSymlink(Symlink $symlink): bool
     {
         if ($symlink->isForceCreate() && $this->isToUnlink($symlink->getLink())) {
             try {
-                if (\is_dir($symlink->getLink())) {
+                if (is_dir($symlink->getLink())) {
                     $result = $this->filesystem->removeDirectory($symlink->getLink());
                 } else {
                     $result = $this->filesystem->remove($symlink->getLink());
@@ -34,7 +36,7 @@ class SymlinksProcessor
                 if (!$result) {
                     throw new RuntimeException('Unknown error');
                 }
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
                 throw new RuntimeException(sprintf(
                     'Cant unlink %s: %s',
                     $symlink->getLink(),
