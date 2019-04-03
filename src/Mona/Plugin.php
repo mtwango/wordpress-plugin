@@ -47,10 +47,16 @@ class Plugin implements PluginInterface
                     if (!$processor->processSymlink($symlink)) {
                         throw new RuntimeException('Unknown error');
                     }
+
+                    // Test colors
+                    $event
+                        ->getIO()
+                        ->write('<error>error</error><info>info</info><warning>warning</warning>');
+
                     $event
                         ->getIO()
                         ->write(sprintf(
-                            '  Symlinking <comment>%s</comment> to <comment>%s</comment>',
+                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment>',
                             $symlink->getOriginalLink(),
                             $symlink->getOriginalTarget()
                         ));
@@ -58,7 +64,7 @@ class Plugin implements PluginInterface
                     $event
                         ->getIO()
                         ->write(sprintf(
-                            '  Symlinking <comment>%s</comment> to <comment>%s</comment> - %s',
+                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment> - %s',
                             $symlink->getOriginalLink(),
                             $symlink->getOriginalTarget(),
                             'Already there'
@@ -67,7 +73,7 @@ class Plugin implements PluginInterface
                     $event
                         ->getIO()
                         ->writeError(sprintf(
-                            '  Symlinking <comment>%s</comment> to <comment>%s</comment> - %s',
+                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment> - %s',
                             $symlink->getLink(),
                             $symlink->getTarget(),
                             $exception->getMessage()
