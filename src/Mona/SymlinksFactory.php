@@ -162,8 +162,8 @@ class SymlinksFactory
             $this->event
                 ->getIO()
                 ->write(sprintf(
-                    '  Foo is <comment>%s</comment>',
-                    $extras['_mona_']['foo']
+                    '  Extras: <comment>%s</comment>',
+                    print_r($extras, true)
                 ));
         }
 
