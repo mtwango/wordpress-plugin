@@ -51,8 +51,8 @@ class Plugin implements PluginInterface
                         ->getIO()
                         ->write(sprintf(
                             '  Symlinking <comment>%s</comment> to <comment>%s</comment>',
-                            $symlink->getLink(),
-                            $symlink->getTarget()
+                            $symlink->getOriginalLink(),
+                            $symlink->getOriginalTarget()
                         ));
                 } catch (LinkDirectoryException $exception) {
                     $event
