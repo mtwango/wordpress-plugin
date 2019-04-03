@@ -24,10 +24,7 @@
         }
     },
     "extra": {
-        "class": "Druidfi\\Mona\\Plugin",
-        "_mona_": {
-            "foo": "bar"
-        }
+        "class": "Druidfi\\Mona\\Plugin"
     },
     "require": {
         "php": "^7.1",

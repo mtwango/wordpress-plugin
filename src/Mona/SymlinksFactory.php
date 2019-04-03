@@ -158,13 +158,6 @@ class SymlinksFactory
     {
         $extras = $this->event->getComposer()->getPackage()->getExtra();
 
-        $this->event
-            ->getIO()
-            ->write(sprintf(
-                '  Extras: <comment>%s</comment>',
-                print_r($extras, true)
-            ));
-
         if (!isset($extras[static::EXTRA_NAME][static::SYMLINKS])) {
             return [];
         }
