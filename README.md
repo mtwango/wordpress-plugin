@@ -12,6 +12,12 @@ To install the latest stable version of this component, open a console and execu
 $ composer require druidfi/mona-plugin
 ```
 
+## Includes
+
+This plugin will also require for you the following packages:
+
+- Drush 8.2.x
+
 ## Usage
 
 ### Configuration
