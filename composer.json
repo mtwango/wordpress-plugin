@@ -38,6 +38,7 @@
         "composer/composer": "^1.0"
     },
     "conflict": {
+        "drupal/core": "8.*",
         "drupal/drupal": "<7.65",
         "drush/drush": "<8.2"
     }
