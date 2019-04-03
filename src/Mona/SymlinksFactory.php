@@ -11,7 +11,7 @@ use function is_string;
 
 class SymlinksFactory
 {
-    const PACKAGE_NAME = 'druidfi/mona-plugin';
+    const EXTRA_NAME = 'mona-plugin';
 
     const SYMLINKS = 'symlinks';
     const SKIP_MISSED_TARGET = 'skip-missing-target';
@@ -73,10 +73,12 @@ class SymlinksFactory
         }
 
         $extras = $this->event->getComposer()->getPackage()->getExtra();
-        if (!isset($extras[static::PACKAGE_NAME][$name])) {
+
+        if (!isset($extras[static::EXTRA_NAME][$name])) {
             return $default;
         }
-        return (bool)$extras[static::PACKAGE_NAME][$name];
+
+        return (bool) $extras[static::EXTRA_NAME][$name];
     }
 
     /**
@@ -156,16 +158,16 @@ class SymlinksFactory
     {
         $extras = $this->event->getComposer()->getPackage()->getExtra();
 
-        if (!isset($extras[static::PACKAGE_NAME][static::SYMLINKS])) {
+        if (!isset($extras[static::EXTRA_NAME][static::SYMLINKS])) {
             return [];
         }
 
-        $configs = $extras[static::PACKAGE_NAME][static::SYMLINKS];
+        $configs = $extras[static::EXTRA_NAME][static::SYMLINKS];
 
         if (!is_array($configs)) {
             throw new InvalidArgumentException(sprintf(
                 'The extra.%s.%s setting must be an array.',
-                static::PACKAGE_NAME,
+                static::EXTRA_NAME,
                 static::SYMLINKS
             ));
         }
