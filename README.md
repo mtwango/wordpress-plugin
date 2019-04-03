@@ -16,13 +16,15 @@ $ composer require druidfi/mona-plugin
 
 This plugin will also require for you the following packages:
 
-- Drush 8.2.x
+- composer/installers:^1.6
+- cweagans/composer-patches:^1.6
+- drush/drush:^8.2
 
 ## Usage
 
 ### Configuration
 
-Create the symlinks definition adding a `druidfi/mona-plugin` section inside the `extra` section of the composer.json
+Create the symlinks definition adding a `mona-plugin` section inside the `extra` section of the composer.json
 file.
 
 Set `skip-missing-target` to true if we should not throw exception if target path doesn't exists  
@@ -36,7 +38,7 @@ For personal configs `link` must be defined
 ```json
 {
     "extra": {
-        "druidfi/mona-plugin": {
+        "mona-plugin": {
             "symlinks": {
                 "vendor/ckeditor/ckeditor": "public/sites/all/libraries/ckeditor",
                 "vendor/drupal/authorize.php": "public/authorize.php",
