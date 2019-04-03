@@ -41,6 +41,10 @@ class Plugin implements PluginInterface
             $factory = new SymlinksFactory($event, $fileSystem);
             $processor = new SymlinksProcessor($fileSystem);
 
+            $event
+                ->getIO()
+                ->write('<info>Mona: symlinking files and folders.</info>');
+
             $symlinks = $factory->process();
             foreach ($symlinks as $symlink) {
                 try {
@@ -48,15 +52,10 @@ class Plugin implements PluginInterface
                         throw new RuntimeException('Unknown error');
                     }
 
-                    // Test colors
-                    $event
-                        ->getIO()
-                        ->write('<error>error</error><info>info</info><warning>warning</warning>');
-
                     $event
                         ->getIO()
                         ->write(sprintf(
-                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment>',
+                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment> <info>OK</info>',
                             $symlink->getOriginalLink(),
                             $symlink->getOriginalTarget()
                         ));
@@ -64,10 +63,10 @@ class Plugin implements PluginInterface
                     $event
                         ->getIO()
                         ->write(sprintf(
-                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment> - %s',
+                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment>: %s',
                             $symlink->getOriginalLink(),
                             $symlink->getOriginalTarget(),
-                            'Already there'
+                            'Already there <info>OK</info>'
                         ));
                 } catch (Exception $exception) {
                     $event
