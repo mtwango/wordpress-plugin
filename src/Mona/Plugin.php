@@ -56,9 +56,9 @@ class Plugin implements PluginInterface
                         ->getIO()
                         ->write(sprintf(
                             '  Symlinking <comment>%s</comment> to <comment>%s</comment> - %s',
-                            $symlink->getLink(),
-                            $symlink->getTarget(),
-                            'Skipped'
+                            $symlink->getOriginalLink(),
+                            $symlink->getOriginalTarget(),
+                            'Already there'
                         ));
                 } catch (\Exception $exception) {
                     $event

@@ -12,7 +12,6 @@ use function is_string;
 class SymlinksFactory
 {
     const EXTRA_NAME = 'mona-plugin';
-
     const SYMLINKS = 'symlinks';
     const SKIP_MISSED_TARGET = 'skip-missing-target';
     const ABSOLUTE_PATH = 'absolute-path';
@@ -35,12 +34,11 @@ class SymlinksFactory
         $this->fileSystem = $filesystem;
     }
 
-
-  /**
-   * @return Symlink[]
-   * @throws SymlinksException
-   * @throws Exception
-   */
+    /**
+     * @return Symlink[]
+     * @throws SymlinksException
+     * @throws Exception
+     */
     public function process(): array
     {
         $symlinksData = $this->getSymlinksData();
@@ -144,6 +142,8 @@ class SymlinksFactory
         }
 
         return (new Symlink())
+            ->setOriginalTarget($target)
+            ->setOriginalLink($link)
             ->setTarget($targetPath)
             ->setLink($linkPath)
             ->setAbsolutePath($this->getConfig(static::ABSOLUTE_PATH, $linkData, false))

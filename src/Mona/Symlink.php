@@ -7,6 +7,16 @@ class Symlink
     /**
      * @var string
      */
+    protected $originalTarget = '';
+
+    /**
+     * @var string
+     */
+    protected $originalLink = '';
+
+    /**
+     * @var string
+     */
     protected $target = '';
 
     /**
@@ -23,6 +33,44 @@ class Symlink
      * @var bool
      */
     protected $forceCreate = false;
+
+    /**
+     * @return string
+     */
+    public function getOriginalTarget(): string
+    {
+        return $this->originalTarget;
+    }
+
+    /**
+     * @param string $target
+     *
+     * @return Symlink
+     */
+    public function setOriginalTarget(string $target): Symlink
+    {
+        $this->originalTarget = $target;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOriginalLink(): string
+    {
+        return $this->originalLink;
+    }
+
+    /**
+     * @param string $link
+     *
+     * @return Symlink
+     */
+    public function setOriginalLink(string $link): Symlink
+    {
+        $this->originalLink = $link;
+        return $this;
+    }
 
     /**
      * @return string
