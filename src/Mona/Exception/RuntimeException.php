@@ -1,6 +1,6 @@
 <?php
 
-namespace Druidfi\Mona;
+namespace Druidfi\Mona\Exception;
 
 class RuntimeException extends \RuntimeException implements SymlinksException
 {

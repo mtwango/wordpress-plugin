@@ -47,7 +47,7 @@ class Symlink
      *
      * @return Symlink
      */
-    public function setOriginalTarget(string $target): Symlink
+    public function setOriginalTarget(string $target): self
     {
         $this->originalTarget = $target;
         return $this;
@@ -66,7 +66,7 @@ class Symlink
      *
      * @return Symlink
      */
-    public function setOriginalLink(string $link): Symlink
+    public function setOriginalLink(string $link): self
     {
         $this->originalLink = $link;
         return $this;
@@ -85,7 +85,7 @@ class Symlink
      *
      * @return Symlink
      */
-    public function setTarget(string $target): Symlink
+    public function setTarget(string $target): self
     {
         $this->target = $target;
         return $this;
@@ -104,7 +104,7 @@ class Symlink
      *
      * @return Symlink
      */
-    public function setLink(string $link): Symlink
+    public function setLink(string $link): self
     {
         $this->link = $link;
         return $this;
@@ -123,7 +123,7 @@ class Symlink
      *
      * @return Symlink
      */
-    public function setAbsolutePath(bool $absolutePath): Symlink
+    public function setAbsolutePath(bool $absolutePath): self
     {
         $this->absolutePath = $absolutePath;
         return $this;
@@ -142,7 +142,7 @@ class Symlink
      *
      * @return Symlink
      */
-    public function setForceCreate(bool $forceCreate): Symlink
+    public function setForceCreate(bool $forceCreate): self
     {
         $this->forceCreate = $forceCreate;
         return $this;

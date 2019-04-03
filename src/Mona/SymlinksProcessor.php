@@ -3,6 +3,8 @@
 namespace Druidfi\Mona;
 
 use Composer\Util\Filesystem;
+use Druidfi\Mona\Exception\LinkDirectoryException;
+use Druidfi\Mona\Exception\RuntimeException;
 use Exception;
 use function is_dir;
 
@@ -46,7 +48,7 @@ class SymlinksProcessor
         }
 
         if ($this->isToUnlink($symlink->getLink())) {
-            throw new LinkDirectoryError('Link ' . $symlink->getLink() . ' already exists');
+            throw new LinkDirectoryException('Link ' . $symlink->getLink() . ' already exists');
         }
 
         if ($symlink->isAbsolutePath()) {

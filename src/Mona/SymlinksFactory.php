@@ -4,10 +4,14 @@ namespace Druidfi\Mona;
 
 use Composer\Script\Event;
 use Composer\Util\Filesystem;
+use Druidfi\Mona\Exception\InvalidArgumentException;
+use Druidfi\Mona\Exception\LinkDirectoryException;
+use Druidfi\Mona\Exception\SymlinksException;
 use Exception;
 use function dirname;
 use function is_array;
 use function is_string;
+use RuntimeException;
 
 class SymlinksFactory
 {
@@ -83,9 +87,9 @@ class SymlinksFactory
      * @param string       $target
      * @param array|string $linkData
      *
-     * @throws LinkDirectoryError
-     * @throws InvalidArgumentException
      * @return null|Symlink
+     * @throws InvalidArgumentException
+     * @throws LinkDirectoryException
      */
     protected function processSymlink(string $target, $linkData)
     {
@@ -126,8 +130,8 @@ class SymlinksFactory
 
         try {
             $this->fileSystem->ensureDirectoryExists(dirname($linkPath));
-        } catch (\RuntimeException $exception) {
-            throw new LinkDirectoryError($exception->getMessage(), $exception->getCode(), $exception);
+        } catch (RuntimeException $exception) {
+            throw new LinkDirectoryException($exception->getMessage(), $exception->getCode(), $exception);
         }
 
         if (is_link($linkPath) && realpath(readlink($linkPath)) === $targetPath) {

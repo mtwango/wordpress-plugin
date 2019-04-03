@@ -8,6 +8,9 @@ use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use Composer\Util\Filesystem;
+use Druidfi\Mona\Exception\LinkDirectoryException;
+use Druidfi\Mona\Exception\RuntimeException;
+use Exception;
 
 /**
  * Class Plugin
@@ -51,7 +54,7 @@ class Plugin implements PluginInterface
                             $symlink->getLink(),
                             $symlink->getTarget()
                         ));
-                } catch (LinkDirectoryError $exception) {
+                } catch (LinkDirectoryException $exception) {
                     $event
                         ->getIO()
                         ->write(sprintf(
@@ -60,7 +63,7 @@ class Plugin implements PluginInterface
                             $symlink->getOriginalTarget(),
                             'Already there'
                         ));
-                } catch (\Exception $exception) {
+                } catch (Exception $exception) {
                     $event
                         ->getIO()
                         ->writeError(sprintf(
