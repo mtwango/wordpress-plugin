@@ -158,7 +158,7 @@ class SymlinksFactory
     {
         $extras = $this->event->getComposer()->getPackage()->getExtra();
 
-        if (!isset($extras['_mona_']['foo'])) {
+        if (isset($extras['_mona_']['foo'])) {
             $this->event
                 ->getIO()
                 ->write(sprintf(
