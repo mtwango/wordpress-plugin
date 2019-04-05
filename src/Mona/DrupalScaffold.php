@@ -71,13 +71,22 @@ class DrupalScaffold
     {
         $config = $this->getScaffoldConfig();
         $drupal = $this->getDrupalPackage();
-        $installPath = $this->event->getComposer()->getInstallationManager()->getInstallPath($drupal);
-
-        $this->event->getIO()->write('Install path = '. $installPath);
-        $this->event->getIO()->write('Web root = '. $this->getWebroot());
+        $sourcePath = $this->event->getComposer()->getInstallationManager()->getInstallPath($drupal);
+        $webroot = $this->getWebroot();
+        $scaffoldFiles = [];
 
         foreach ($config as $source => $target) {
-            $this->event->getIO()->write($source .' >> '. $target);
+            $sourcePath = $sourcePath . DIRECTORY_SEPARATOR . $source;
+            $targetPath = $webroot . DIRECTORY_SEPARATOR . $target;
+
+            $scaffoldFiles[] = [
+                'source' => $source,
+                'sourcePath' => $sourcePath,
+                'target' => $target,
+                'targetPath' => $targetPath,
+            ];
         }
+
+        return $scaffoldFiles;
     }
 }

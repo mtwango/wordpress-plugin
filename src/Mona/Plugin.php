@@ -45,6 +45,20 @@ class Plugin implements PluginInterface
             $event->getIO()->write('<info>Mona: Drupal scaffold files.</info>');
             $scaffoldFiles = $drupalScaffold->process();
 
+            foreach ($scaffoldFiles as $file) {
+                try {
+                    $fileSystem->copy($file['sourcePath'], $file['targetPath']);
+                } catch (Exception $exception) {
+                    $event
+                        ->getIO()
+                        ->writeError(sprintf(
+                            '  - Copying scaffold file <comment>%s</comment> failed: %s <error>[ERROR]</error>',
+                            $file['source'],
+                            $exception->getMessage()
+                        ));
+                }
+            }
+
             $event->getIO()->write('<info>Mona: symlinking files and folders.</info>');
             $symlinks = $factory->process();
 
