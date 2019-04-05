@@ -38,6 +38,16 @@ class Plugin implements PluginInterface
     {
         $eventDispatcher = $composer->getEventDispatcher();
         $this->extra = $composer->getPackage()->getExtra();
+        $this->extra = $this->preConfigureExtra();
+        $composer->getPackage()->setExtra($this->extra);
+
+        // TODO add Drupal 7 repository
+        /*
+         {
+            "type": "composer",
+            "url": "https://packages.drupal.org/7"
+         }
+         */
 
         $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->monafy());
         $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy());
