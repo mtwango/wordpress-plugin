@@ -149,6 +149,11 @@ class Plugin implements PluginInterface
     {
         $webroot = $this->getWebroot();
 
+        // If root package does not have extra.composer-exit-on-patch-failure
+        if (!isset($this->extra['composer-exit-on-patch-failure'])) {
+            $this->extra['composer-exit-on-patch-failure'] = true;
+        }
+
         // If root package does not have extra.installer-paths
         if (!isset($this->extra['installer-paths'])) {
             $this->extra['installer-paths'] = [
