@@ -14,7 +14,16 @@ class DrupalScaffold
     const WEBROOT_DEFAULT = 'public';
 
     const DEFAULT = [
-        'foo' => 'bar',
+        'authorize.php',
+        'cron.php',
+        'index.php',
+        'robots.txt',
+        'update.php',
+        'xmlrpc.php',
+        'includes',
+        'misc',
+        'modules',
+        'themes',
     ];
 
     /**
@@ -75,14 +84,13 @@ class DrupalScaffold
         $webroot = $this->getWebroot();
         $scaffoldFiles = [];
 
-        foreach ($config as $source => $target) {
+        foreach ($config as $source) {
             $sourcePath = $sourcePath . DIRECTORY_SEPARATOR . $source;
-            $targetPath = $webroot . DIRECTORY_SEPARATOR . $target;
+            $targetPath = $webroot . DIRECTORY_SEPARATOR . $source;
 
             $scaffoldFiles[] = [
                 'source' => $source,
                 'sourcePath' => $sourcePath,
-                'target' => $target,
                 'targetPath' => $targetPath,
             ];
         }
