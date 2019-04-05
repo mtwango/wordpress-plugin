@@ -80,16 +80,16 @@ class DrupalScaffold
     {
         $config = $this->getScaffoldConfig();
         $drupal = $this->getDrupalPackage();
-        $sourcePath = $this->event->getComposer()->getInstallationManager()->getInstallPath($drupal);
+        $source = $this->event->getComposer()->getInstallationManager()->getInstallPath($drupal);
         $webroot = $this->getWebroot();
         $scaffoldFiles = [];
 
-        foreach ($config as $source) {
-            $sourcePath = $sourcePath . DIRECTORY_SEPARATOR . $source;
-            $targetPath = $webroot . DIRECTORY_SEPARATOR . $source;
+        foreach ($config as $file) {
+            $sourcePath = $source . DIRECTORY_SEPARATOR . $file;
+            $targetPath = $webroot . DIRECTORY_SEPARATOR . $file;
 
             $scaffoldFiles[] = [
-                'source' => $source,
+                'source' => $file,
                 'sourcePath' => $sourcePath,
                 'targetPath' => $targetPath,
             ];
