@@ -42,9 +42,11 @@ class Plugin implements PluginInterface
         $this->preConfigureExtra();
         $composer->getPackage()->setExtra($this->extra);
 
-        $composer->getRepositoryManager()->createRepository('composer', [
+        $repository = $composer->getRepositoryManager()->createRepository('composer', [
             'url' => self::DRUPAL_REPOSITORY,
         ]);
+
+        $composer->getRepositoryManager()->addRepository($repository);
 
         $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->monafy());
         $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy());
@@ -77,7 +79,7 @@ class Plugin implements PluginInterface
             $factory = new SymlinksFactory($event, $fileSystem);
             $processor = new SymlinksProcessor($fileSystem);
 
-            $event->getIO()->write('<info>Mona: Drupal scaffold files.</info>');
+            $event->getIO()->write('<info>Mona: Copying Drupal 7 core files and folders.</info>');
             $scaffoldFiles = $drupalScaffold->process();
 
             foreach ($scaffoldFiles as $file) {
