@@ -38,7 +38,7 @@ class Plugin implements PluginInterface
     {
         $eventDispatcher = $composer->getEventDispatcher();
         $this->extra = $composer->getPackage()->getExtra();
-        $this->extra = $this->preConfigureExtra();
+        $this->preConfigureExtra();
         $composer->getPackage()->setExtra($this->extra);
 
         // TODO add Drupal 7 repository
@@ -150,12 +150,11 @@ class Plugin implements PluginInterface
      */
     protected function preConfigureExtra()
     {
-        $originalExtra = $this->extra;
         $webroot = $this->getWebroot();
 
         // If root package does not have extra.installer-paths
-        if (!isset($originalExtra['installer-paths'])) {
-            $originalExtra['installer-paths'] = [
+        if (!isset($this->extra['installer-paths'])) {
+            $this->extra['installer-paths'] = [
                 "vendor/drupal" => ["type:drupal-core"],
                 'vendor/drupal_libraries/{$name}' => ["type:drupal-library"],
                 $webroot .'/sites/all/modules/contrib/{$name}' => ["type:drupal-module"],
@@ -163,7 +162,5 @@ class Plugin implements PluginInterface
                 $webroot .'/sites/all/drush/{$name}' => ["type:drupal-drush"],
             ];
         }
-
-        return $originalExtra;
     }
 }
