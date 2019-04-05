@@ -38,14 +38,16 @@ class Plugin implements PluginInterface
     {
         return function (Event $event) {
             $fileSystem = new Filesystem();
+            $drupalScaffold = new DrupalScaffold($event, $fileSystem);
             $factory = new SymlinksFactory($event, $fileSystem);
             $processor = new SymlinksProcessor($fileSystem);
 
-            $event
-                ->getIO()
-                ->write('<info>Mona: symlinking files and folders.</info>');
+            $event->getIO()->write('<info>Mona: Drupal scaffold files.</info>');
+            $scaffoldFiles = $drupalScaffold->process();
 
+            $event->getIO()->write('<info>Mona: symlinking files and folders.</info>');
             $symlinks = $factory->process();
+
             foreach ($symlinks as $symlink) {
                 try {
                     if (!$processor->processSymlink($symlink)) {
