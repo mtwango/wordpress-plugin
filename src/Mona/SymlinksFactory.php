@@ -15,7 +15,6 @@ use RuntimeException;
 
 class SymlinksFactory
 {
-    const EXTRA_NAME = 'mona-plugin';
     const SYMLINKS = 'symlinks';
     const SKIP_MISSED_TARGET = 'skip-missing-target';
     const ABSOLUTE_PATH = 'absolute-path';
@@ -76,11 +75,11 @@ class SymlinksFactory
 
         $extras = $this->event->getComposer()->getPackage()->getExtra();
 
-        if (!isset($extras[static::EXTRA_NAME][$name])) {
+        if (!isset($extras[Plugin::EXTRA_NAME][$name])) {
             return $default;
         }
 
-        return (bool) $extras[static::EXTRA_NAME][$name];
+        return (bool) $extras[Plugin::EXTRA_NAME][$name];
     }
 
     /**
@@ -162,16 +161,16 @@ class SymlinksFactory
     {
         $extras = $this->event->getComposer()->getPackage()->getExtra();
 
-        if (!isset($extras[static::EXTRA_NAME][static::SYMLINKS])) {
+        if (!isset($extras[Plugin::EXTRA_NAME][static::SYMLINKS])) {
             return [];
         }
 
-        $configs = $extras[static::EXTRA_NAME][static::SYMLINKS];
+        $configs = $extras[Plugin::EXTRA_NAME][static::SYMLINKS];
 
         if (!is_array($configs)) {
             throw new InvalidArgumentException(sprintf(
                 'The extra.%s.%s setting must be an array.',
-                static::EXTRA_NAME,
+                Plugin::EXTRA_NAME,
                 static::SYMLINKS
             ));
         }

@@ -21,6 +21,14 @@ use Exception;
 class Plugin implements PluginInterface
 {
     const DRUPAL_PACKAGE = 'drupal/drupal';
+    const EXTRA_NAME = 'mona-plugin';
+    const WEBROOT = 'webroot';
+    const WEBROOT_DEFAULT = 'public';
+
+    /**
+     * @var array
+     */
+    protected $extra;
 
     /**
      * @param Composer    $composer
@@ -29,8 +37,24 @@ class Plugin implements PluginInterface
     public function activate(Composer $composer, IOInterface $io)
     {
         $eventDispatcher = $composer->getEventDispatcher();
+        $this->extra = $composer->getPackage()->getExtra();
+
         $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->monafy());
         $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy());
+    }
+
+    /**
+     * Get webroot folder name
+     *
+     * @return string
+     */
+    protected function getWebroot(): string
+    {
+        if (isset($this->extra[self::EXTRA_NAME][self::WEBROOT])) {
+            return $this->extra[self::EXTRA_NAME][self::WEBROOT];
+        }
+
+        return self::WEBROOT_DEFAULT;
     }
 
     /**
@@ -39,7 +63,8 @@ class Plugin implements PluginInterface
     protected function monafy(): callable
     {
         return function (Event $event) {
-            $extra = $event->getComposer()->getPackage()->getExtra();
+            $extra = $this->preConfigureExtra();
+            $event->getComposer()->getPackage()->setExtra($extra);
             $fileSystem = new Filesystem();
             $drupalScaffold = new DrupalScaffold($event, $fileSystem, $extra);
             $factory = new SymlinksFactory($event, $fileSystem);
@@ -106,5 +131,29 @@ class Plugin implements PluginInterface
                 }
             }
         };
+    }
+
+    /**
+     * Pre-configure other Composer plugins
+     *
+     * @return array
+     */
+    protected function preConfigureExtra()
+    {
+        $originalExtra = $this->extra;
+        $webroot = $this->getWebroot();
+
+        // If root package does not have extra.installer-paths
+        if (!isset($originalExtra['installer-paths'])) {
+            $originalExtra['installer-paths'] = [
+                "vendor/drupal" => ["type:drupal-core"],
+                'vendor/drupal_libraries/{$name}' => ["type:drupal-library"],
+                $webroot .'/sites/all/modules/contrib/{$name}' => ["type:drupal-module"],
+                $webroot .'/sites/all/themes/{$name}' => ["type:drupal-theme"],
+                $webroot .'/sites/all/drush/{$name}' => ["type:drupal-drush"],
+            ];
+        }
+
+        return $originalExtra;
     }
 }

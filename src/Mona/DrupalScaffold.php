@@ -7,10 +7,7 @@ use Composer\Util\Filesystem;
 
 class DrupalScaffold
 {
-    const EXTRA_NAME = 'mona-plugin';
     const DRUPAL_SCAFFOLD = 'drupal-scaffold';
-    const WEBROOT = 'webroot';
-    const WEBROOT_DEFAULT = 'public';
 
     const DEFAULT = [
         'authorize.php',
@@ -34,7 +31,7 @@ class DrupalScaffold
     /**
      * @var array
      */
-    protected $extras;
+    protected $extra;
 
     /**
      * @var Filesystem
@@ -44,7 +41,7 @@ class DrupalScaffold
     public function __construct(Event $event, Filesystem $filesystem, $extra)
     {
         $this->event = $event;
-        $this->extras = $extra;
+        $this->extra = $extra;
         $this->fileSystem = $filesystem;
     }
 
@@ -60,8 +57,8 @@ class DrupalScaffold
 
     protected function getScaffoldConfig()
     {
-        if (isset($this->extras[self::EXTRA_NAME][self::DRUPAL_SCAFFOLD])) {
-            return $this->extras[self::EXTRA_NAME][self::DRUPAL_SCAFFOLD];
+        if (isset($this->extra[Plugin::EXTRA_NAME][self::DRUPAL_SCAFFOLD])) {
+            return $this->extra[Plugin::EXTRA_NAME][self::DRUPAL_SCAFFOLD];
         }
 
         return self::DEFAULT;
@@ -69,11 +66,11 @@ class DrupalScaffold
 
     protected function getWebroot(): string
     {
-        if (isset($this->extras[self::EXTRA_NAME][self::WEBROOT])) {
-            return $this->extras[self::EXTRA_NAME][self::WEBROOT];
+        if (isset($this->extra[Plugin::EXTRA_NAME][Plugin::WEBROOT])) {
+            return $this->extra[Plugin::EXTRA_NAME][Plugin::WEBROOT];
         }
 
-        return self::WEBROOT_DEFAULT;
+        return Plugin::WEBROOT_DEFAULT;
     }
 
     public function process(): array
