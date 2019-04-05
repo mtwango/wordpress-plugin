@@ -51,6 +51,14 @@ class Plugin implements PluginInterface
             foreach ($scaffoldFiles as $file) {
                 try {
                     $fileSystem->copy($file['sourcePath'], $file['targetPath']);
+
+                    $event
+                        ->getIO()
+                        ->write(sprintf(
+                            '  - Copied <comment>%s</comment> to <comment>%s</comment> <info>[OK]</info>',
+                            $file['sourcePath'],
+                            $file['targetPath']
+                        ));
                 } catch (Exception $exception) {
                     $event
                         ->getIO()
