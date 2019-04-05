@@ -21,6 +21,7 @@ use Exception;
 class Plugin implements PluginInterface
 {
     const DRUPAL_PACKAGE = 'drupal/drupal';
+    const DRUPAL_REPOSITORY = 'https://packages.drupal.org/7';
     const EXTRA_NAME = 'mona-plugin';
     const WEBROOT = 'webroot';
     const WEBROOT_DEFAULT = 'public';
@@ -41,13 +42,9 @@ class Plugin implements PluginInterface
         $this->preConfigureExtra();
         $composer->getPackage()->setExtra($this->extra);
 
-        // TODO add Drupal 7 repository
-        /*
-         {
-            "type": "composer",
-            "url": "https://packages.drupal.org/7"
-         }
-         */
+        $composer->getRepositoryManager()->createRepository('composer', [
+            'url' => self::DRUPAL_REPOSITORY,
+        ]);
 
         $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->monafy());
         $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy());
