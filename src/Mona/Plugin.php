@@ -20,6 +20,8 @@ use Exception;
  */
 class Plugin implements PluginInterface
 {
+    const DRUPAL_PACKAGE = 'drupal/drupal';
+
     /**
      * @param Composer    $composer
      * @param IOInterface $io
@@ -27,18 +29,19 @@ class Plugin implements PluginInterface
     public function activate(Composer $composer, IOInterface $io)
     {
         $eventDispatcher = $composer->getEventDispatcher();
-        $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->createLinks());
-        $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->createLinks());
+        $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->monafy());
+        $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy());
     }
 
     /**
      * @return callable
      */
-    protected function createLinks(): callable
+    protected function monafy(): callable
     {
         return function (Event $event) {
+            $extra = $event->getComposer()->getPackage()->getExtra();
             $fileSystem = new Filesystem();
-            $drupalScaffold = new DrupalScaffold($event, $fileSystem);
+            $drupalScaffold = new DrupalScaffold($event, $fileSystem, $extra);
             $factory = new SymlinksFactory($event, $fileSystem);
             $processor = new SymlinksProcessor($fileSystem);
 

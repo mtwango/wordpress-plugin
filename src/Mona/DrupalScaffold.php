@@ -8,7 +8,6 @@ use Composer\Util\Filesystem;
 class DrupalScaffold
 {
     const EXTRA_NAME = 'mona-plugin';
-    const DRUPAL_PACKAGE = 'drupal/drupal';
     const DRUPAL_SCAFFOLD = 'drupal-scaffold';
     const WEBROOT = 'webroot';
     const WEBROOT_DEFAULT = 'public';
@@ -23,6 +22,7 @@ class DrupalScaffold
         'includes',
         'misc',
         'modules',
+        'profiles',
         'themes',
     ];
 
@@ -41,10 +41,10 @@ class DrupalScaffold
      */
     protected $fileSystem;
 
-    public function __construct(Event $event, Filesystem $filesystem)
+    public function __construct(Event $event, Filesystem $filesystem, $extra)
     {
         $this->event = $event;
-        $this->extras = $event->getComposer()->getPackage()->getExtra();
+        $this->extras = $extra;
         $this->fileSystem = $filesystem;
     }
 
@@ -53,7 +53,7 @@ class DrupalScaffold
         $package =  $this->event->getComposer()
                     ->getRepositoryManager()
                     ->getLocalRepository()
-                    ->findPackage(self::DRUPAL_PACKAGE, '*');
+                    ->findPackage(Plugin::DRUPAL_PACKAGE, '*');
 
         return $package;
     }
