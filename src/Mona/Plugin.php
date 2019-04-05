@@ -72,10 +72,8 @@ class Plugin implements PluginInterface
     protected function monafy(): callable
     {
         return function (Event $event) {
-            $extra = $this->preConfigureExtra();
-            $event->getComposer()->getPackage()->setExtra($extra);
             $fileSystem = new Filesystem();
-            $drupalScaffold = new DrupalScaffold($event, $fileSystem, $extra);
+            $drupalScaffold = new DrupalScaffold($event, $fileSystem, $this->extra);
             $factory = new SymlinksFactory($event, $fileSystem);
             $processor = new SymlinksProcessor($fileSystem);
 
