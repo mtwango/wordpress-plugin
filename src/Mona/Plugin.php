@@ -3,7 +3,10 @@
 namespace Druidfi\Mona;
 
 use Composer\Composer;
+use Composer\Installer\PackageEvent;
+use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
+use Composer\Package\Package;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
@@ -33,24 +36,50 @@ class Plugin implements PluginInterface
     protected $extra;
 
     /**
+     * @var IOInterface
+     */
+    protected $io;
+
+    /**
      * @param Composer    $composer
      * @param IOInterface $io
      */
     public function activate(Composer $composer, IOInterface $io)
     {
+        $this->io = $io;
         $eventDispatcher = $composer->getEventDispatcher();
         $this->extra = $composer->getPackage()->getExtra();
         $this->preConfigureExtra();
         $composer->getPackage()->setExtra($this->extra);
 
+        $requires = $composer->getPackage()->getRequires();
+
+        /*$drupal = new Package('drupal/drupal', '^7.75', '7.75');
+        $requires['drupal/drupal'] = $drupal;
+
+        $composer->getPackage()->setRequires($requires);
+        */
         $repository = $composer->getRepositoryManager()->createRepository('composer', [
             'url' => self::DRUPAL_REPOSITORY,
         ]);
 
         $composer->getRepositoryManager()->addRepository($repository);
 
-        $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->monafy());
-        $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy());
+        $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->monafy(), 100);
+        $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy(), 100);
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            PackageEvents::PRE_PACKAGE_INSTALL => ['setup'],
+            PackageEvents::PRE_PACKAGE_UPDATE => ['setup'],
+        ];
+    }
+
+    protected function setup(PackageEvent $event)
+    {
+        $this->io->write('  - Setup for <info>mona-plugin</info>');
     }
 
     protected function getScaffoldConfig()
