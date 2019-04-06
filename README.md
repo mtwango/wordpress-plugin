@@ -18,6 +18,7 @@ This plugin will also require for you the following packages:
 
 - composer/installers:^1.6
 - cweagans/composer-patches:^1.6
+- drupal/drupal:^7.65
 - drush/drush:^8.2
 
 ## Usage
@@ -40,20 +41,6 @@ For personal configs `link` must be defined
     "extra": {
         "mona-plugin": {
             "symlinks": {
-                "vendor/ckeditor/ckeditor": "public/sites/all/libraries/ckeditor",
-                "vendor/drupal/authorize.php": "public/authorize.php",
-                "vendor/drupal/cron.php": "public/cron.php",
-                "vendor/drupal/index.php": "public/index.php",
-                "vendor/drupal/robots.txt": "public/robots.txt",
-                "vendor/drupal/update.php": "public/update.php",
-                "vendor/drupal/xmlrpc.php": "public/xmlrpc.php",
-                "vendor/drupal/includes": "public/includes",
-                "vendor/drupal/misc": "public/misc",
-                "vendor/drupal/modules": "public/modules",
-                "vendor/drupal/profiles/standard": "public/profiles/standard",
-                "vendor/drupal/themes": "public/themes",
-                "vendor/drupal_modules": "public/sites/all/modules/contrib",
-                "vendor/drupal_themes/omega": "public/sites/all/themes/omega",
                 "vendor/woocommerce/flexslider": "public/sites/all/libraries/flexslider"
             },
             "force-create": false,
@@ -63,6 +50,27 @@ For personal configs `link` must be defined
         }
     }
 }
+```
+
+### Adding library as a drupal-library
+
+If you need library to be installed to `sites/all/libraries`, you can define a custom repository:
+
+```json
+"repositories": [
+    {
+        "type":"package",
+        "package": {
+            "name": "ckeditor/ckeditor",
+            "version": "4.1.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ckeditor/ckeditor-releases/archive/4.1.2/full.zip"
+            },
+            "type": "drupal-library"
+        }
+    }
+]
 ```
 
 ### Notes
