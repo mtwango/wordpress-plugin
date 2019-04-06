@@ -3,12 +3,9 @@
 namespace Druidfi\Mona;
 
 use Composer\Script\Event;
-use Composer\Util\Filesystem;
 
 class DrupalScaffold
 {
-    const DRUPAL_SCAFFOLD = 'drupal-scaffold';
-
     const DEFAULT = [
         'authorize.php',
         'cron.php',
@@ -31,18 +28,18 @@ class DrupalScaffold
     /**
      * @var array
      */
-    protected $extra;
+    protected $scaffoldConfig;
 
     /**
-     * @var Filesystem
+     * @var array
      */
-    protected $fileSystem;
+    protected $webroot;
 
-    public function __construct(Event $event, Filesystem $filesystem, $extra)
+    public function __construct(Event $event, array $scaffoldConfig, $webroot)
     {
         $this->event = $event;
-        $this->extra = $extra;
-        $this->fileSystem = $filesystem;
+        $this->scaffoldConfig = $scaffoldConfig;
+        $this->webroot = $webroot;
     }
 
     protected function getDrupalPackage()
@@ -55,35 +52,15 @@ class DrupalScaffold
         return $package;
     }
 
-    protected function getScaffoldConfig()
-    {
-        if (isset($this->extra[Plugin::EXTRA_NAME][self::DRUPAL_SCAFFOLD])) {
-            return $this->extra[Plugin::EXTRA_NAME][self::DRUPAL_SCAFFOLD];
-        }
-
-        return self::DEFAULT;
-    }
-
-    protected function getWebroot(): string
-    {
-        if (isset($this->extra[Plugin::EXTRA_NAME][Plugin::WEBROOT])) {
-            return $this->extra[Plugin::EXTRA_NAME][Plugin::WEBROOT];
-        }
-
-        return Plugin::WEBROOT_DEFAULT;
-    }
-
     public function process(): array
     {
-        $config = $this->getScaffoldConfig();
         $drupal = $this->getDrupalPackage();
         $source = $this->event->getComposer()->getInstallationManager()->getInstallPath($drupal);
-        $webroot = $this->getWebroot();
         $scaffoldFiles = [];
 
-        foreach ($config as $file) {
+        foreach ($this->scaffoldConfig as $file) {
             $sourcePath = $source . DIRECTORY_SEPARATOR . $file;
-            $targetPath = $webroot . DIRECTORY_SEPARATOR . $file;
+            $targetPath = $this->webroot . DIRECTORY_SEPARATOR . $file;
 
             $scaffoldFiles[] = [
                 'source' => $file,

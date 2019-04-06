@@ -22,6 +22,7 @@ class Plugin implements PluginInterface
 {
     const DRUPAL_PACKAGE = 'drupal/drupal';
     const DRUPAL_REPOSITORY = 'https://packages.drupal.org/7';
+    const DRUPAL_SCAFFOLD = 'drupal-scaffold';
     const EXTRA_NAME = 'mona-plugin';
     const WEBROOT = 'webroot';
     const WEBROOT_DEFAULT = 'public';
@@ -52,6 +53,15 @@ class Plugin implements PluginInterface
         $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy());
     }
 
+    protected function getScaffoldConfig()
+    {
+        if (isset($this->extra[self::EXTRA_NAME][self::DRUPAL_SCAFFOLD])) {
+            return $this->extra[self::EXTRA_NAME][self::DRUPAL_SCAFFOLD];
+        }
+
+        return DrupalScaffold::DEFAULT;
+    }
+
     /**
      * Get webroot folder name
      *
@@ -73,7 +83,7 @@ class Plugin implements PluginInterface
     {
         return function (Event $event) {
             $fileSystem = new Filesystem();
-            $drupalScaffold = new DrupalScaffold($event, $fileSystem, $this->extra);
+            $drupalScaffold = new DrupalScaffold($event, $this->getScaffoldConfig(), $this->getWebroot());
             $factory = new SymlinksFactory($event, $fileSystem);
             $processor = new SymlinksProcessor($fileSystem);
 
@@ -157,8 +167,8 @@ class Plugin implements PluginInterface
         // If root package does not have extra.installer-paths
         if (!isset($this->extra['installer-paths'])) {
             $this->extra['installer-paths'] = [
-                "vendor/drupal" => ["type:drupal-core"],
-                'vendor/drupal_libraries/{$name}' => ["type:drupal-library"],
+                'vendor/drupal' => ['type:drupal-core'],
+                $webroot .'/sites/all/libraries/{$name}' => ["type:drupal-library"],
                 $webroot .'/sites/all/modules/contrib/{$name}' => ["type:drupal-module"],
                 $webroot .'/sites/all/themes/{$name}' => ["type:drupal-theme"],
                 $webroot .'/sites/all/drush/{$name}' => ["type:drupal-drush"],
