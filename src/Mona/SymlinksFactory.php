@@ -16,10 +16,10 @@ use RuntimeException;
 class SymlinksFactory
 {
     const SYMLINKS = 'symlinks';
-    const SKIP_MISSED_TARGET = 'skip-missing-target';
-    const ABSOLUTE_PATH = 'absolute-path';
-    const THROW_EXCEPTION = 'throw-exception';
-    const FORCE_CREATE = 'force-create';
+    const SKIP_MISSED_TARGET = 'symlinks-skip-missing-target';
+    const ABSOLUTE_PATH = 'symlinks-absolute-path';
+    const THROW_EXCEPTION = 'symlinks-throw-exception';
+    const FORCE_CREATE = 'symlinks-force-create';
 
     /**
      * @var Filesystem
