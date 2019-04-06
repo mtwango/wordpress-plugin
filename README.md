@@ -25,13 +25,40 @@ This plugin will also require for you the following packages:
 
 ### Configuration
 
-Create the symlinks definition adding a `mona-plugin` section inside the `extra` section of the composer.json
-file.
+See all the default values. AKA you don't need to add these if not overriding.
 
-Set `skip-missing-target` to true if we should not throw exception if target path doesn't exists  
-Set `absolute-path` to true if you want to create realpath symlinks  
-Set `throw-exception` to false if you dont want to break creating on some error while check symlinks  
-Set `force-create` to force unlink link if something already exists on link path    
+```json
+{
+    "extra": {
+        "mona-plugin": {
+            "composer-exit-on-patch-failure": true,
+            "installer-paths": {
+                "vendor/drupal": ["type:drupal-core"],
+                "{$webroot}/sites/all/libraries/{$name}": ["type:drupal-library"],
+                "{$webroot}/sites/all/modules/contrib/{$name}": ["type:drupal-module"],
+                "{$webroot}/sites/all/themes/{$name}": ["type:drupal-theme"],
+                "{$webroot}/sites/all/drush/{$name}": ["type:drupal-drush"]
+            },
+            "symlinks": {
+            },
+            "symlinks-force-create": false,
+            "symlinks-skip-missing-target": false,
+            "symlinks-absolute-path": false,
+            "symlinks-throw-exception": true,
+            "webroot": "public"
+        }
+    }
+}
+```
+
+### Symlinking
+
+Create the symlinks to `extra.mona-plugin.symlinks` section.
+
+Set `symlinks-skip-missing-target` to true if we should not throw exception if target path doesn't exists  
+Set `symlinks-absolute-path` to true if you want to create realpath symlinks  
+Set `symlinks-throw-exception` to false if you dont want to break creating on some error while check symlinks  
+Set `symlinks-force-create` to force unlink link if something already exists on link path    
 
 You can set personal configs for any symlink.  
 For personal configs `link` must be defined  
@@ -43,10 +70,10 @@ For personal configs `link` must be defined
             "symlinks": {
                 "vendor/woocommerce/flexslider": "public/sites/all/libraries/flexslider"
             },
-            "force-create": false,
-            "skip-missing-target": false,
-            "absolute-path": false,
-            "throw-exception": true
+            "symlinks-force-create": false,
+            "symlinks-skip-missing-target": false,
+            "symlinks-absolute-path": false,
+            "symlinks-throw-exception": true
         }
     }
 }
@@ -57,25 +84,23 @@ For personal configs `link` must be defined
 If you need library to be installed to `sites/all/libraries`, you can define a custom repository:
 
 ```json
-"repositories": [
-    {
-        "type":"package",
-        "package": {
-            "name": "ckeditor/ckeditor",
-            "version": "4.1.2",
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/ckeditor/ckeditor-releases/archive/4.1.2/full.zip"
-            },
-            "type": "drupal-library"
+{
+    "repositories": [
+        {
+            "type":"package",
+            "package": {
+                "name": "ckeditor/ckeditor",
+                "version": "4.1.2",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/ckeditor/ckeditor-releases/archive/4.1.2/full.zip"
+                },
+                "type": "drupal-library"
+            }
         }
-    }
-]
+    ]
+}
 ```
-
-### Notes
-
-- DO NOT use --no-plugins for composer install or update
 
 ## Forked from
 
