@@ -26,16 +26,16 @@ class DrupalScaffold
     protected $event;
 
     /**
-     * @var array
+     * @var object
      */
     protected $scaffoldConfig;
 
     /**
-     * @var array
+     * @var string
      */
     protected $webroot;
 
-    public function __construct(Event $event, array $scaffoldConfig, $webroot)
+    public function __construct(Event $event, $scaffoldConfig, $webroot)
     {
         $this->event = $event;
         $this->scaffoldConfig = $scaffoldConfig;
