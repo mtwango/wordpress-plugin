@@ -11,7 +11,7 @@
         "ckeditor/ckeditor": "4.10.1",
         "druidfi/mona-plugin": "dev-master",
         "drupal/drupal": "^7.65",
-        "drupal/token": "^1"
+        "drupal/pathauto": "1.3"
     },
     "repositories": [
         {
@@ -35,7 +35,9 @@
             }
         },
         "patches": {
-
+            "drupal/pathauto": {
+                "https://www.drupal.org/i/2906761": "https://www.drupal.org/files/issues/patch_145.patch"
+            }
         }
     }
 }
