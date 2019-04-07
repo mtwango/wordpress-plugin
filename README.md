@@ -18,14 +18,26 @@ This plugin will also require for you the following packages:
 
 - composer/installers:^1.6
 - cweagans/composer-patches:^1.6
-- drupal/drupal:^7.65
 - drush/drush:^8.2
 
 ## Usage
 
 ### Configuration
 
-See all the default values. AKA you don't need to add these if not overriding.
+Drupal repository must be defined:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/7"
+        }
+    ]
+}
+```
+    
+Plugin default values (AKA you don't need to add these if not overriding):
 
 ```json
 {
