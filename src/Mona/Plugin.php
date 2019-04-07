@@ -3,10 +3,7 @@
 namespace Druidfi\Mona;
 
 use Composer\Composer;
-use Composer\Installer\PackageEvent;
-use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
-use Composer\Package\Package;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
@@ -17,14 +14,10 @@ use Exception;
 
 /**
  * Class Plugin
- *
- * @author  Dmitry Panychev <thor_work@yahoo.com>
- *
  */
-class Plugin implements PluginInterface
+final class Plugin implements PluginInterface
 {
     const DRUPAL_PACKAGE = 'drupal/drupal';
-    const DRUPAL_REPOSITORY = 'https://packages.drupal.org/7';
     const DRUPAL_SCAFFOLD = 'drupal-scaffold';
     const EXTRA_NAME = 'mona-plugin';
     const WEBROOT = 'webroot';
@@ -46,40 +39,17 @@ class Plugin implements PluginInterface
      */
     public function activate(Composer $composer, IOInterface $io)
     {
+        $io->write('<info>Mona dependencies installed, now install project dependencies</info>');
+
         $this->io = $io;
+
         $eventDispatcher = $composer->getEventDispatcher();
         $this->extra = $composer->getPackage()->getExtra();
         $this->preConfigureExtra();
         $composer->getPackage()->setExtra($this->extra);
 
-        $requires = $composer->getPackage()->getRequires();
-
-        /*$drupal = new Package('drupal/drupal', '^7.75', '7.75');
-        $requires['drupal/drupal'] = $drupal;
-
-        $composer->getPackage()->setRequires($requires);
-        */
-        $repository = $composer->getRepositoryManager()->createRepository('composer', [
-            'url' => self::DRUPAL_REPOSITORY,
-        ]);
-
-        $composer->getRepositoryManager()->addRepository($repository);
-
         $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->monafy(), 100);
         $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy(), 100);
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            PackageEvents::PRE_PACKAGE_INSTALL => ['setup'],
-            PackageEvents::PRE_PACKAGE_UPDATE => ['setup'],
-        ];
-    }
-
-    protected function setup(PackageEvent $event)
-    {
-        $this->io->write('  - Setup for <info>mona-plugin</info>');
     }
 
     protected function getScaffoldConfig()
@@ -126,7 +96,7 @@ class Plugin implements PluginInterface
                     $event
                         ->getIO()
                         ->write(sprintf(
-                            '  - Copied <comment>%s</comment> to <comment>%s</comment> <info>[OK]</info>',
+                            '  - Copied <comment>%s</comment> to <comment>%s</comment>',
                             $file['sourcePath'],
                             $file['targetPath']
                         ));
@@ -153,7 +123,7 @@ class Plugin implements PluginInterface
                     $event
                         ->getIO()
                         ->write(sprintf(
-                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment> <info>[OK]</info>',
+                            '  - Symlinking <comment>%s</comment> to <comment>%s</comment>',
                             $symlink->getOriginalLink(),
                             $symlink->getOriginalTarget()
                         ));
@@ -161,7 +131,7 @@ class Plugin implements PluginInterface
                     $event
                         ->getIO()
                         ->write(sprintf(
-                            '  - Symlink from <comment>%s</comment> to <comment>%s</comment> already exists <info>[OK]</info>',
+                            '  - Symlink from <comment>%s</comment> to <comment>%s</comment> already exists',
                             $symlink->getOriginalLink(),
                             $symlink->getOriginalTarget()
                         ));
@@ -181,8 +151,6 @@ class Plugin implements PluginInterface
 
     /**
      * Pre-configure other Composer plugins
-     *
-     * @return array
      */
     protected function preConfigureExtra()
     {

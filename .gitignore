@@ -4,3 +4,5 @@ composer.phar
 .php_cs.cache
 composer.lock
 .idea
+/test/
+!/test/composer.json

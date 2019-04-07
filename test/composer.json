@@ -1,0 +1,41 @@
+{
+    "name": "druidfi/mona-plugin-test",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Druid.fi",
+            "email": "info@druid.fi"
+        }
+    ],
+    "require": {
+        "ckeditor/ckeditor": "4.10.1",
+        "druidfi/mona-plugin": "dev-master",
+        "drupal/drupal": "^7.65",
+        "drupal/token": "^1"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/mona-plugin"
+        },
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/7"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "mona-plugin": {
+            "symlinks": {
+                "vendor/ckeditor/ckeditor": "public/sites/all/libraries/ckeditor"
+            }
+        },
+        "patches": {
+
+        }
+    }
+}
