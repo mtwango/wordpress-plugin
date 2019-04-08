@@ -81,8 +81,9 @@ final class Plugin implements PluginInterface
     protected function monafy(): callable
     {
         return function (Event $event) {
+            $webroot = $this->getWebroot();
             $fileSystem = new Filesystem();
-            $drupalScaffold = new DrupalScaffold($event, $this->getScaffoldConfig(), $this->getWebroot());
+            $drupalScaffold = new DrupalScaffold($event, $this->getScaffoldConfig(), $webroot);
             $factory = new SymlinksFactory($event, $fileSystem);
             $processor = new SymlinksProcessor($fileSystem);
 
@@ -112,7 +113,7 @@ final class Plugin implements PluginInterface
             }
 
             $event->getIO()->write('<info>Mona: symlinking files and folders.</info>');
-            $symlinks = $factory->process();
+            $symlinks = $factory->process($webroot);
 
             foreach ($symlinks as $symlink) {
                 try {

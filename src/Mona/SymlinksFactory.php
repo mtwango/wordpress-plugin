@@ -38,16 +38,18 @@ class SymlinksFactory
     }
 
     /**
+     * @param string $webroot
      * @return Symlink[]
      * @throws SymlinksException
-     * @throws Exception
      */
-    public function process(): array
+    public function process(string $webroot): array
     {
         $symlinksData = $this->getSymlinksData();
 
         $symlinks = [];
         foreach ($symlinksData as $target => $linkData) {
+            $linkData = str_replace('${webroot}', $webroot, $linkData);
+
             try {
                 $symlinks[] = $this->processSymlink($target, $linkData);
             } catch (SymlinksException $exception) {
