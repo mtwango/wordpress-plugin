@@ -3,7 +3,13 @@
 namespace Druidfi\Mona;
 
 use Composer\Composer;
+use Composer\DependencyResolver\Operation\InstallOperation;
+use Composer\DependencyResolver\Operation\UpdateOperation;
+use Composer\EventDispatcher\EventSubscriberInterface;
+use Composer\Installer\PackageEvent;
+use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
+use Composer\Package\Package;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
@@ -15,7 +21,7 @@ use Exception;
 /**
  * Class Plugin
  */
-final class Plugin implements PluginInterface
+class Plugin implements PluginInterface, EventSubscriberInterface
 {
     const DRUPAL_PACKAGE = 'drupal/drupal';
     const DRUPAL_SCAFFOLD = 'drupal-scaffold';
@@ -50,6 +56,48 @@ final class Plugin implements PluginInterface
 
         $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->monafy(), 100);
         $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy(), 100);
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            PackageEvents::PRE_PACKAGE_INSTALL => 'checkForDrupalLibrary',
+            PackageEvents::PRE_PACKAGE_UPDATE => 'checkForDrupalLibrary',
+        ];
+    }
+
+    public function checkForDrupalLibrary(PackageEvent $event)
+    {
+        try {
+            $package = $this->getTargetPackage($event->getOperation());
+            $package_name = $package->getName();
+            $libraries = $this->extra[self::EXTRA_NAME]['libraries'] ?? [];
+
+            if (in_array($package_name, $libraries)) {
+                $event->getIO()->write('  - Changing <info>' . $package_name . '</info> type to <comment>drupal-library</comment>');
+                $package->setType('drupal-library');
+            }
+        } catch (Exception $e) {
+            // Do nothing, we don't care about other operation types
+        }
+    }
+
+    /**
+     * Get target package
+     *
+     * @param $operation
+     * @return Package
+     * @throws Exception
+     */
+    protected function getTargetPackage($operation): Package
+    {
+        if ($operation instanceof InstallOperation) {
+            return $operation->getPackage();
+        } elseif ($operation instanceof UpdateOperation) {
+            return $operation->getTargetPackage();
+        }
+
+        throw new Exception('Unknown operation: ' . get_class($operation));
     }
 
     protected function getScaffoldConfig()
@@ -97,7 +145,7 @@ final class Plugin implements PluginInterface
                     $event
                         ->getIO()
                         ->write(sprintf(
-                            '  - Copied <comment>%s</comment> to <comment>%s</comment>',
+                            '  - Copying <comment>%s</comment> to <comment>%s</comment>',
                             $file['sourcePath'],
                             $file['targetPath']
                         ));

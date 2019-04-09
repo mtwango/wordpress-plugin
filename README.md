@@ -46,10 +46,10 @@ Plugin default values (AKA you don't need to add these if not overriding):
             "composer-exit-on-patch-failure": true,
             "installer-paths": {
                 "vendor/drupal": ["type:drupal-core"],
-                "{$webroot}/sites/all/libraries/{$name}": ["type:drupal-library"],
-                "{$webroot}/sites/all/modules/contrib/{$name}": ["type:drupal-module"],
-                "{$webroot}/sites/all/themes/{$name}": ["type:drupal-theme"],
-                "{$webroot}/sites/all/drush/{$name}": ["type:drupal-drush"]
+                "${webroot}/sites/all/libraries/{$name}": ["type:drupal-library"],
+                "${webroot}/sites/all/modules/contrib/{$name}": ["type:drupal-module"],
+                "${webroot}/sites/all/themes/{$name}": ["type:drupal-theme"],
+                "${webroot}/sites/all/drush/{$name}": ["type:drupal-drush"]
             },
             "symlinks": {
             },
@@ -93,8 +93,22 @@ For personal configs `link` must be defined
 
 ### Adding library as a drupal-library
 
-If you need library to be installed to `sites/all/libraries`, you can define a custom repository:
+If you need library to be installed to `sites/all/libraries`, you can list it as a Drupal library:
 
+```json
+{
+    "extra": {
+        "mona-plugin": {
+            "libraries": [
+                "ckeditor/ckeditor"
+            ]
+        }
+     }
+}
+```
+
+Or you can define a custom repository:
+     
 ```json
 {
     "repositories": [

@@ -30,8 +30,11 @@
     },
     "extra": {
         "mona-plugin": {
+            "libraries": [
+                "ckeditor/ckeditor"
+            ],
             "symlinks": {
-                "vendor/ckeditor/ckeditor": "public/sites/all/libraries/ckeditor"
+                "vendor/drupal/.htaccess": "public/.htaccess"
             }
         },
         "patches": {
