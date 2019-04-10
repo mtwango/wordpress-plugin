@@ -93,7 +93,9 @@ For personal configs `link` must be defined
 
 ### Adding library as a drupal-library
 
-If you need library to be installed to `sites/all/libraries`, you can list it as a Drupal library:
+If you need library to be installed to `sites/all/libraries`,
+
+you can list it as a Drupal library if it's found from [Packagist](https://packagist.org/):
 
 ```json
 {
@@ -107,7 +109,7 @@ If you need library to be installed to `sites/all/libraries`, you can list it as
 }
 ```
 
-Or you can define a custom repository:
+or you can define a custom repository:
      
 ```json
 {
