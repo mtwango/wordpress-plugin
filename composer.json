@@ -28,18 +28,18 @@
     },
     "require": {
         "php": "^7.1",
-        "composer-plugin-api": "^1.0",
+        "composer-plugin-api": "^1.0 || ^2.0",
         "composer/installers": "^1.6",
         "cweagans/composer-patches": "^1.6",
-        "drush/drush": "^8.2"
+        "drush/drush": "^8.4"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "@stable",
-        "composer/composer": "^1.0"
+        "composer/composer": "^1.0 || ^2.0"
     },
     "conflict": {
         "drupal/core": "8.*",
-        "drupal/drupal": "<7.65",
-        "drush/drush": "<8.2"
+        "drupal/drupal": "<7.73",
+        "drush/drush": "<8.4"
     }
 }

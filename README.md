@@ -17,7 +17,7 @@ $ composer require druidfi/mona-plugin
 This plugin will also require for you the following packages:
 
 - composer/installers:^1.6
-- cweagans/composer-patches:^1.6
+- cweagans/composer-patches:^1.7
 - drush/drush:^8.2
 
 ## Usage
@@ -36,7 +36,7 @@ Drupal repository must be defined:
     ]
 }
 ```
-    
+
 Plugin default values (AKA you don't need to add these if not overriding):
 
 ```json
@@ -67,13 +67,13 @@ Plugin default values (AKA you don't need to add these if not overriding):
 
 Create the symlinks to `extra.mona-plugin.symlinks` section.
 
-Set `symlinks-skip-missing-target` to true if we should not throw exception if target path doesn't exists  
-Set `symlinks-absolute-path` to true if you want to create realpath symlinks  
-Set `symlinks-throw-exception` to false if you dont want to break creating on some error while check symlinks  
-Set `symlinks-force-create` to force unlink link if something already exists on link path    
+Set `symlinks-skip-missing-target` to true if we should not throw exception if target path doesn't exists
+Set `symlinks-absolute-path` to true if you want to create realpath symlinks
+Set `symlinks-throw-exception` to false if you dont want to break creating on some error while check symlinks
+Set `symlinks-force-create` to force unlink link if something already exists on link path
 
-You can set personal configs for any symlink.  
-For personal configs `link` must be defined  
+You can set personal configs for any symlink.
+For personal configs `link` must be defined
 
 ```json
 {
@@ -110,7 +110,7 @@ you can list it as a Drupal library if it's found from [Packagist](https://packa
 ```
 
 or you can define a custom repository:
-     
+
 ```json
 {
     "repositories": [
