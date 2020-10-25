@@ -16,9 +16,9 @@ $ composer require druidfi/mona-plugin
 
 This plugin will also require for you the following packages:
 
-- composer/installers:^1.6
+- composer/installers:^1.9
 - cweagans/composer-patches:^1.7
-- drush/drush:^8.2
+- drush/drush:^8.4
 
 ## Usage
 
