@@ -29,4 +29,4 @@ jobs:
           tools: 'composer:${{ matrix.composer-versions }}'
 
       - name: Run composer install
-        run: composer --working-dir=test install --no-progress --no-interaction
+        run: composer --working-dir=tests/gha install --no-progress --no-interaction

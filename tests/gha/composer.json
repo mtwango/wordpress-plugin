@@ -16,7 +16,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../"
+            "url": "../../"
         },
         {
             "type": "composer",
