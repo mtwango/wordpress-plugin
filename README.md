@@ -4,11 +4,9 @@
 
 Composer plugin to symlink paths to create Composer based Drupal 7 installation.
 
-See more in Mona repository: https://github.com/druidfi/mona
+## Install / update
 
-## Installation
-
-To install the latest stable version of this component, open a console and execute the following command:
+To install / update the latest stable version of this component, open a console and execute the following command:
 
 ```
 $ composer require druidfi/mona-plugin
