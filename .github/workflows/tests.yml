@@ -1,0 +1,32 @@
+name: Tests
+
+on:
+  push:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-18.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['7.1','7.2','7.3','7.4','8.0']
+        composer-versions: ['v1','v2']
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Setup PHP with Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '${{ matrix.php-versions }}'
+          tools: 'composer:${{ matrix.composer-versions }}'
+
+      - name: Run composer install
+        run: composer --working-dir=test install --no-progress --no-interaction

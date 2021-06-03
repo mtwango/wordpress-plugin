@@ -7,7 +7,7 @@ test:
       --volume $(shell pwd)/test:/app \
       --volume $(shell pwd):/mona-plugin \
       --volume ~/.composer:/tmp \
-      composer:1.10.15 install --no-dev --no-suggest
+      composer:1 install --no-dev --no-suggest
 
 PHONY += test-2
 test-2:
@@ -16,6 +16,6 @@ test-2:
       --volume $(shell pwd)/test:/app \
       --volume $(shell pwd):/mona-plugin \
       --volume ~/.composer:/tmp \
-      composer:2.0 install --no-dev
+      composer:2 install --no-dev
 
 .PHONY: $(PHONY)
