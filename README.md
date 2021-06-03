@@ -12,6 +12,14 @@ To install / update the latest stable version of this component, open a console 
 $ composer require druidfi/mona-plugin
 ```
 
+### Note!
+
+If you for some reason must use Composer v1 and/or PHP < 7.3, you can require 1.x version of Mona Plugin:
+
+```
+$ composer require druidfi/mona-plugin:^1.4.0
+```
+
 ## Includes
 
 This plugin will also require for you the following packages:

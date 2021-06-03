@@ -9,7 +9,7 @@
     ],
     "require": {
         "ckeditor/ckeditor": "4.10.1",
-        "druidfi/mona-plugin": "dev-main",
+        "druidfi/mona-plugin": "*",
         "drupal/drupal": "^7.81",
         "drupal/pathauto": "1.3"
     },

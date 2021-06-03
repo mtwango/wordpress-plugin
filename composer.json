@@ -27,15 +27,15 @@
         "class": "Druidfi\\Mona\\Plugin"
     },
     "require": {
-        "php": "^7.1 || ^8.0",
-        "composer-plugin-api": "^1.0 || ^2.0",
+        "php": "^7.3 || ^8.0",
+        "composer-plugin-api": "^2.0",
         "composer/installers": "^1.11",
         "cweagans/composer-patches": "^1.7",
         "drush/drush": "^8.4"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "@stable",
-        "composer/composer": "^1.0 || ^2.0"
+        "composer/composer": "^2.0"
     },
     "conflict": {
         "drupal/core": "8.*",
