@@ -86,14 +86,15 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      * Get target package
      *
      * @param $operation
-     * @return Package
      * @throws Exception
+     * @return Package
      */
     protected function getTargetPackage($operation): Package
     {
         if ($operation instanceof InstallOperation) {
             return $operation->getPackage();
-        } elseif ($operation instanceof UpdateOperation) {
+        }
+        if ($operation instanceof UpdateOperation) {
             return $operation->getTargetPackage();
         }
 
@@ -214,10 +215,10 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         if (!isset($this->extra['installer-paths'])) {
             $this->extra['installer-paths'] = [
                 'vendor/drupal' => ['type:drupal-core'],
-                $webroot .'/sites/all/libraries/{$name}' => ["type:drupal-library"],
-                $webroot .'/sites/all/modules/contrib/{$name}' => ["type:drupal-module"],
-                $webroot .'/sites/all/themes/contrib/{$name}' => ["type:drupal-theme"],
-                $webroot .'/sites/all/drush/{$name}' => ["type:drupal-drush"],
+                $webroot .'/sites/all/libraries/{$name}' => ['type:drupal-library'],
+                $webroot .'/sites/all/modules/contrib/{$name}' => ['type:drupal-module'],
+                $webroot .'/sites/all/themes/contrib/{$name}' => ['type:drupal-theme'],
+                $webroot .'/sites/all/drush/{$name}' => ['type:drupal-drush'],
             ];
         }
     }

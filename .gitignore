@@ -7,3 +7,4 @@ composer.lock
 /tests/public
 /tests/vendor
 /tests/composer.lock
+/.php-cs-fixer.cache

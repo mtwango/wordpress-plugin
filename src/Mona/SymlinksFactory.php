@@ -4,11 +4,10 @@ namespace Druidfi\Mona;
 
 use Composer\Script\Event;
 use Composer\Util\Filesystem;
+use function dirname;
 use Druidfi\Mona\Exception\InvalidArgumentException;
 use Druidfi\Mona\Exception\LinkDirectoryException;
 use Druidfi\Mona\Exception\SymlinksException;
-use Exception;
-use function dirname;
 use function is_array;
 use function is_string;
 use RuntimeException;
@@ -39,8 +38,8 @@ class SymlinksFactory
 
     /**
      * @param string $webroot
-     * @return Symlink[]
      * @throws SymlinksException
+     * @return Symlink[]
      */
     public function process(string $webroot): array
     {
@@ -88,9 +87,9 @@ class SymlinksFactory
      * @param string       $target
      * @param array|string $linkData
      *
-     * @return null|Symlink
      * @throws InvalidArgumentException
      * @throws LinkDirectoryException
+     * @return null|Symlink
      */
     protected function processSymlink(string $target, $linkData)
     {
