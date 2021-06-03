@@ -4,5 +4,6 @@ composer.phar
 .php_cs.cache
 composer.lock
 .idea
-/tests/*/public
-/tests/*/vendor
+/tests/public
+/tests/vendor
+/tests/composer.lock

@@ -15,8 +15,13 @@
     },
     "repositories": [
         {
+            "type": "composer",
+            "url": "https://repo.packagist.org",
+            "exclude": ["druidfi/mona-plugin", "drupal/*"]
+        },
+        {
             "type": "path",
-            "url": "../../"
+            "url": ".."
         },
         {
             "type": "composer",
