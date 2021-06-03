@@ -1,5 +1,7 @@
 # Mona Composer Plugin
 
+[![Tests](https://github.com/druidfi/mona-plugin/actions/workflows/tests.yml/badge.svg)](https://github.com/druidfi/mona-plugin/actions/workflows/tests.yml)
+
 Composer plugin to symlink paths to create Composer based Drupal 7 installation.
 
 See more in Mona repository: https://github.com/druidfi/mona
