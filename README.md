@@ -138,6 +138,20 @@ or you can define a custom repository:
 }
 ```
 
+## Development
+
+Install with dev dependencies:
+
+```
+$ composer install
+```
+
+Run PHP CS Fixer:
+
+```
+$ vendor/bin/php-cs-fixer fix src
+```
+
 ## Forked from
 
 This plugin is based on [ComposerSymlinks](https://github.com/somework/composer-symlinks) and modified to be used with

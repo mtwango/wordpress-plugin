@@ -2,6 +2,7 @@
 
 namespace Druidfi\Mona;
 
+use Composer\Package\PackageInterface;
 use Composer\Script\Event;
 
 class DrupalScaffold
@@ -42,14 +43,12 @@ class DrupalScaffold
         $this->webroot = $webroot;
     }
 
-    protected function getDrupalPackage()
+    protected function getDrupalPackage(): ?PackageInterface
     {
-        $package =  $this->event->getComposer()
+        return $this->event->getComposer()
                     ->getRepositoryManager()
                     ->getLocalRepository()
                     ->findPackage(Plugin::DRUPAL_PACKAGE, '*');
-
-        return $package;
     }
 
     public function process(): array

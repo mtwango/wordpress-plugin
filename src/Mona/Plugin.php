@@ -58,7 +58,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy(), 100);
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             PackageEvents::PRE_PACKAGE_INSTALL => 'checkForDrupalLibrary',

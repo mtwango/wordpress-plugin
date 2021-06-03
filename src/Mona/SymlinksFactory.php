@@ -91,7 +91,7 @@ class SymlinksFactory
      * @throws LinkDirectoryException
      * @return null|Symlink
      */
-    protected function processSymlink(string $target, $linkData)
+    protected function processSymlink(string $target, $linkData): ?Symlink
     {
         $link = $this->getLink($linkData);
 
