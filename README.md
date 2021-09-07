@@ -9,7 +9,7 @@ Composer plugin to symlink paths to create Composer based Drupal 7 installation.
 To install / update the latest stable version of this component, open a console and execute the following command:
 
 ```
-$ composer require druidfi/mona-plugin
+composer require druidfi/mona-plugin
 ```
 
 ### Note!
@@ -17,16 +17,16 @@ $ composer require druidfi/mona-plugin
 If you for some reason must use Composer v1 and/or PHP < 7.3, you can require 1.x version of Mona Plugin:
 
 ```
-$ composer require druidfi/mona-plugin:^1.4.0
+composer require druidfi/mona-plugin:^1.4.0
 ```
 
 ## Includes
 
 This plugin will also require for you the following packages:
 
-- composer/installers:^1.11
+- composer/installers:^2.0
 - cweagans/composer-patches:^1.7
-- drush/drush:^8.5
+- drush/drush:^8.4
 
 ## Usage
 
@@ -143,13 +143,13 @@ or you can define a custom repository:
 Install with dev dependencies:
 
 ```
-$ composer install
+composer install
 ```
 
 Run PHP CS Fixer:
 
 ```
-$ vendor/bin/php-cs-fixer fix src
+vendor/bin/php-cs-fixer fix src
 ```
 
 ## Forked from
