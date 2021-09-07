@@ -29,7 +29,7 @@
     "require": {
         "php": "^7.3 || ^8.0",
         "composer-plugin-api": "^2.0",
-        "composer/installers": "^1.11",
+        "composer/installers": "^1.11 || ^2.0",
         "cweagans/composer-patches": "^1.7",
         "drush/drush": "^8.4"
     },
