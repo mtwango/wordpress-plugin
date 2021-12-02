@@ -44,8 +44,8 @@ class SymlinksFactory
     public function process(string $webroot): array
     {
         $symlinksData = $this->getSymlinksData();
-
         $symlinks = [];
+
         foreach ($symlinksData as $target => $linkData) {
             $linkData = str_replace('${webroot}', $webroot, $linkData);
 
@@ -55,6 +55,7 @@ class SymlinksFactory
                 if ($this->getConfig(static::THROW_EXCEPTION, $linkData, true)) {
                     throw $exception;
                 }
+
                 $this->event->getIO()->writeError(
                     sprintf(
                         '  Error while process <comment>%s</comment>: <comment>%s</comment>',
@@ -123,6 +124,7 @@ class SymlinksFactory
             if ($this->getConfig(static::SKIP_MISSED_TARGET, $link)) {
                 return null;
             }
+
             throw new InvalidArgumentException(
                 sprintf('The target path %s does not exists', $targetPath)
             );
@@ -142,6 +144,7 @@ class SymlinksFactory
                     $link
                 )
             );
+
             return null;
         }
 
@@ -187,11 +190,13 @@ class SymlinksFactory
     protected function getLink($linkData): string
     {
         $link = '';
+
         if (is_array($linkData)) {
             $link = $linkData['link'] ?? '';
         } elseif (is_string($linkData)) {
             $link = $linkData;
         }
+
         return $link;
     }
 }

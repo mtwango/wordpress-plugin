@@ -54,14 +54,12 @@ class SymlinksProcessor
         if ($symlink->isAbsolutePath()) {
             return @symlink($symlink->getTarget(), $symlink->getLink());
         }
+
         return $this->filesystem->relativeSymlink($symlink->getTarget(), $symlink->getLink());
     }
 
     protected function isToUnlink(string $path): bool
     {
-        return
-            file_exists($path) ||
-            is_dir($path) ||
-            is_link($path);
+        return file_exists($path) || is_dir($path) || is_link($path);
     }
 }

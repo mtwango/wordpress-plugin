@@ -50,6 +50,7 @@ class Symlink
     public function setOriginalTarget(string $target): self
     {
         $this->originalTarget = $target;
+
         return $this;
     }
 
@@ -69,6 +70,7 @@ class Symlink
     public function setOriginalLink(string $link): self
     {
         $this->originalLink = $link;
+
         return $this;
     }
 
@@ -88,6 +90,7 @@ class Symlink
     public function setTarget(string $target): self
     {
         $this->target = $target;
+
         return $this;
     }
 
@@ -107,6 +110,7 @@ class Symlink
     public function setLink(string $link): self
     {
         $this->link = $link;
+
         return $this;
     }
 
@@ -126,6 +130,7 @@ class Symlink
     public function setAbsolutePath(bool $absolutePath): self
     {
         $this->absolutePath = $absolutePath;
+
         return $this;
     }
 
@@ -145,6 +150,7 @@ class Symlink
     public function setForceCreate(bool $forceCreate): self
     {
         $this->forceCreate = $forceCreate;
+
         return $this;
     }
 }

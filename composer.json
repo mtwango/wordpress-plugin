@@ -2,7 +2,6 @@
     "name": "druidfi/mona-plugin",
     "type": "composer-plugin",
     "description": "Mona Composer Plugin for Drupal 7 sites",
-    "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
         {
@@ -28,7 +27,7 @@
     },
     "require": {
         "php": "^7.3 || ^8.0",
-        "composer-plugin-api": "^2.0",
+        "composer-plugin-api": "^2.0 || ^2.1",
         "composer/installers": "^1.11 || ^2.0",
         "cweagans/composer-patches": "^1.7",
         "drush/drush": "^8.4"
@@ -39,7 +38,9 @@
     },
     "conflict": {
         "drupal/core": "8.*",
-        "drupal/drupal": "<7.81",
+        "drupal/drupal": "<7.83",
         "drush/drush": "<8.4"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
