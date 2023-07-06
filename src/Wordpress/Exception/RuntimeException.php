@@ -2,6 +2,5 @@
 
 namespace Mtwango\Wordpress\Exception;
 
-class RuntimeException extends \RuntimeException implements SymlinksException
-{
+class RuntimeException extends \RuntimeException implements SymlinksException {
 }

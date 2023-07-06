@@ -2,6 +2,5 @@
 
 namespace Mtwango\Wordpress\Exception;
 
-interface SymlinksException
-{
+interface SymlinksException {
 }
