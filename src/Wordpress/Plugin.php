@@ -191,7 +191,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         // If root package does not have extra.installer-paths
         if (!isset($this->extra['installer-paths'])) {
             $this->extra['installer-paths'] = [
-                'vendor/wordpress' => ['type:wordpress-core'],
+                'vendor/johnpbloch/wordpress-core' => ['type:wordpress-core'],
                 $webroot .'/wp-content/plugins/{$name}' => ['type:wordpress-plugin'],
                 $webroot .'/wp-content/themes/{$name}' => ['type:wordpress-theme']
             ];
