@@ -1,6 +1,6 @@
 <?php
 
-namespace Druidfi\Mona;
+namespace Mtwango\Wordpress;
 
 use Composer\Composer;
 use Composer\DependencyResolver\Operation\InstallOperation;
@@ -14,8 +14,8 @@ use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use Composer\Util\Filesystem;
-use Druidfi\Mona\Exception\LinkDirectoryException;
-use Druidfi\Mona\Exception\RuntimeException;
+use Mtwango\Wordpress\Exception\LinkDirectoryException;
+use Mtwango\Wordpress\Exception\RuntimeException;
 use Exception;
 
 /**
@@ -25,7 +25,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
 {
     const DRUPAL_PACKAGE = 'drupal/drupal';
     const DRUPAL_SCAFFOLD = 'drupal-scaffold';
-    const EXTRA_NAME = 'mona-plugin';
+    const EXTRA_NAME = 'wordpress-plugin';
     const WEBROOT = 'webroot';
     const WEBROOT_DEFAULT = 'public';
 
@@ -136,7 +136,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             $factory = new SymlinksFactory($event, $fileSystem);
             $processor = new SymlinksProcessor($fileSystem);
 
-            $event->getIO()->write('<info>Mona: Copying Drupal 7 core files and folders.</info>');
+            $event->getIO()->write('<info>Plugin: Copying WordPress core files and folders.</info>');
             $scaffoldFiles = $drupalScaffold->process();
 
             foreach ($scaffoldFiles as $file) {

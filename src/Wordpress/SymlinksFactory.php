@@ -1,13 +1,13 @@
 <?php
 
-namespace Druidfi\Mona;
+namespace Mtwango\Wordpress;
 
 use Composer\Script\Event;
 use Composer\Util\Filesystem;
 use function dirname;
-use Druidfi\Mona\Exception\InvalidArgumentException;
-use Druidfi\Mona\Exception\LinkDirectoryException;
-use Druidfi\Mona\Exception\SymlinksException;
+use Mtwango\Wordpress\Exception\InvalidArgumentException;
+use Mtwango\Wordpress\Exception\LinkDirectoryException;
+use Mtwango\Wordpress\Exception\SymlinksException;
 use function is_array;
 use function is_string;
 use RuntimeException;

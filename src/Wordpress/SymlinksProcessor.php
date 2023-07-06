@@ -1,10 +1,10 @@
 <?php
 
-namespace Druidfi\Mona;
+namespace Mtwango\Wordpress;
 
 use Composer\Util\Filesystem;
-use Druidfi\Mona\Exception\LinkDirectoryException;
-use Druidfi\Mona\Exception\RuntimeException;
+use Mtwango\Wordpress\Exception\LinkDirectoryException;
+use Mtwango\Wordpress\Exception\RuntimeException;
 use Exception;
 use function is_dir;
 

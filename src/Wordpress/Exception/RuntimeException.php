@@ -1,6 +1,6 @@
 <?php
 
-namespace Druidfi\Mona\Exception;
+namespace Mtwango\Wordpress\Exception;
 
 class RuntimeException extends \RuntimeException implements SymlinksException
 {

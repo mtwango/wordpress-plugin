@@ -1,6 +1,6 @@
 <?php
 
-namespace Druidfi\Mona;
+namespace Mtwango\Wordpress;
 
 class Symlink
 {

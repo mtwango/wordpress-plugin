@@ -1,6 +1,6 @@
 <?php
 
-namespace Druidfi\Mona;
+namespace Mtwango\Wordpress;
 
 use Composer\Package\PackageInterface;
 use Composer\Script\Event;

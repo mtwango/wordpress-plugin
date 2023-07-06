@@ -1,23 +1,26 @@
 {
-    "name": "druidfi/mona-plugin-test",
+    "name": "mtwango/wordpress-plugin-test",
     "type": "project",
     "authors": [
+        {
+            "name": "Mtwango",
+            "email": "mtwango@gmail.com"
+        },
         {
             "name": "Druid.fi",
             "email": "info@druid.fi"
         }
     ],
     "require": {
-        "ckeditor/ckeditor": "4.10.1",
-        "druidfi/mona-plugin": "*",
-        "drupal/drupal": "^7.83",
-        "drupal/pathauto": "^1"
+        "mtwango/wordpress-plugin": "*",
+        "johnpbloch/wordpress-core": "^6.2",
+        "wpackagist-plugin/akismet": "^5.2"
     },
     "repositories": [
         {
             "type": "composer",
             "url": "https://repo.packagist.org",
-            "exclude": ["druidfi/mona-plugin", "drupal/*"]
+            "exclude": ["mtwango/wordpress-plugin", "wordpress/*"]
         },
         {
             "type": "path",
@@ -25,26 +28,23 @@
         },
         {
             "type": "composer",
-            "url": "https://packages.drupal.org/7"
+            "url": "https://wpackagist.org"
         }
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "cweagans/composer-patches": true,
+            "composer/installers": true,
+            "mtwango/wordpress-plugin": true
+        }
     },
     "extra": {
-        "mona-plugin": {
-            "libraries": [
-                "ckeditor/ckeditor"
-            ],
+        "wordpress-plugin": {
             "symlinks": {
-                "vendor/drupal/.htaccess": "public/.htaccess"
-            }
-        },
-        "patches": {
-            "drupal/pathauto": {
-                "https://www.drupal.org/i/2906761": "https://www.drupal.org/files/issues/patch_145.patch"
+                "vendor/wordpress/.htaccess": "public/.htaccess"
             }
         }
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Druidfi\Mona\Exception;
+namespace Mtwango\Wordpress\Exception;
 
 interface SymlinksException
 {
