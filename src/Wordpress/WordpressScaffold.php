@@ -5,20 +5,26 @@ namespace Mtwango\Wordpress;
 use Composer\Package\PackageInterface;
 use Composer\Script\Event;
 
-class DrupalScaffold
+class WordpressScaffold
 {
     const DEFAULT = [
-        'authorize.php',
-        'cron.php',
         'index.php',
-        'robots.txt',
-        'update.php',
+        'wp-activate.php',
+        'wp-blog-header.php',
+        'wp-comments-post.php',
+        'wp-config-sample.php',
+        'wp-cron.php',
+        'wp-links-opml.php',
+        'wp-load.php',
+        'wp-login.php',
+        'wp-mail.php',
+        'wp-settings.php',
+        'wp-signup.php',
+        'wp-trackback.php',
         'xmlrpc.php',
-        'includes',
-        'misc',
-        'modules',
-        'profiles',
-        'themes',
+        'wp-admin',
+        'wp-content',
+        'wp-includes',
     ];
 
     /**
@@ -43,18 +49,18 @@ class DrupalScaffold
         $this->webroot = $webroot;
     }
 
-    protected function getDrupalPackage(): ?PackageInterface
+    protected function getWordpressPackage(): ?PackageInterface
     {
         return $this->event->getComposer()
                     ->getRepositoryManager()
                     ->getLocalRepository()
-                    ->findPackage(Plugin::DRUPAL_PACKAGE, '*');
+                    ->findPackage(Plugin::WORDPRESS_PACKAGE, '*');
     }
 
     public function process(): array
     {
-        $drupal = $this->getDrupalPackage();
-        $source = $this->event->getComposer()->getInstallationManager()->getInstallPath($drupal);
+        $wordpress = $this->getWordpressPackage();
+        $source = $this->event->getComposer()->getInstallationManager()->getInstallPath($wordpress);
         $scaffoldFiles = [];
 
         foreach ($this->scaffoldConfig as $file) {

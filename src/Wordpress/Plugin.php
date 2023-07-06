@@ -23,8 +23,8 @@ use Exception;
  */
 class Plugin implements PluginInterface, EventSubscriberInterface
 {
-    const DRUPAL_PACKAGE = 'drupal/drupal';
-    const DRUPAL_SCAFFOLD = 'drupal-scaffold';
+    const WORDPRESS_PACKAGE = 'johnpbloch/wordpress-core';
+    const WORDPRESS_SCAFFOLD = 'wordpress-scaffold';
     const EXTRA_NAME = 'wordpress-plugin';
     const WEBROOT = 'webroot';
     const WEBROOT_DEFAULT = 'public';
@@ -45,7 +45,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     public function activate(Composer $composer, IOInterface $io)
     {
-        $io->write('<info>Mona dependencies installed, now install project dependencies</info>');
+        $io->write('<info>Plugin dependencies installed, now install project dependencies</info>');
 
         $this->io = $io;
 
@@ -54,32 +54,13 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $this->preConfigureExtra();
         $composer->getPackage()->setExtra($this->extra);
 
-        $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->monafy(), 100);
-        $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->monafy(), 100);
+        $eventDispatcher->addListener(ScriptEvents::POST_INSTALL_CMD, $this->wordpressfy(), 100);
+        $eventDispatcher->addListener(ScriptEvents::POST_UPDATE_CMD, $this->wordpressfy(), 100);
     }
 
     public static function getSubscribedEvents(): array
     {
-        return [
-            PackageEvents::PRE_PACKAGE_INSTALL => 'checkForDrupalLibrary',
-            PackageEvents::PRE_PACKAGE_UPDATE => 'checkForDrupalLibrary',
-        ];
-    }
-
-    public function checkForDrupalLibrary(PackageEvent $event)
-    {
-        try {
-            $package = $this->getTargetPackage($event->getOperation());
-            $package_name = $package->getName();
-            $libraries = $this->extra[self::EXTRA_NAME]['libraries'] ?? [];
-
-            if (in_array($package_name, $libraries)) {
-                $event->getIO()->write('  - Changing <info>' . $package_name . '</info> type to <comment>drupal-library</comment>');
-                $package->setType('drupal-library');
-            }
-        } catch (Exception $e) {
-            // Do nothing, we don't care about other operation types
-        }
+        return [];
     }
 
     /**
@@ -103,11 +84,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
 
     protected function getScaffoldConfig()
     {
-        if (isset($this->extra[self::EXTRA_NAME][self::DRUPAL_SCAFFOLD])) {
-            return $this->extra[self::EXTRA_NAME][self::DRUPAL_SCAFFOLD];
-        }
-
-        return DrupalScaffold::DEFAULT;
+        return $this->extra[self::EXTRA_NAME][self::WORDPRESS_SCAFFOLD] ?? WordpressScaffold::DEFAULT;
     }
 
     /**
@@ -127,17 +104,17 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     /**
      * @return callable
      */
-    protected function monafy(): callable
+    protected function wordpressfy(): callable
     {
         return function (Event $event) {
             $webroot = $this->getWebroot();
             $fileSystem = new Filesystem();
-            $drupalScaffold = new DrupalScaffold($event, $this->getScaffoldConfig(), $webroot);
+            $wordpressScaffold = new WordpressScaffold($event, $this->getScaffoldConfig(), $webroot);
             $factory = new SymlinksFactory($event, $fileSystem);
             $processor = new SymlinksProcessor($fileSystem);
 
             $event->getIO()->write('<info>Plugin: Copying WordPress core files and folders.</info>');
-            $scaffoldFiles = $drupalScaffold->process();
+            $scaffoldFiles = $wordpressScaffold->process();
 
             foreach ($scaffoldFiles as $file) {
                 try {
@@ -161,7 +138,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
                 }
             }
 
-            $event->getIO()->write('<info>Mona: symlinking files and folders.</info>');
+            $event->getIO()->write('<info>Plugin: symlinking files and folders.</info>');
             $symlinks = $factory->process($webroot);
 
             foreach ($symlinks as $symlink) {
@@ -214,11 +191,9 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         // If root package does not have extra.installer-paths
         if (!isset($this->extra['installer-paths'])) {
             $this->extra['installer-paths'] = [
-                'vendor/drupal' => ['type:drupal-core'],
-                $webroot .'/sites/all/libraries/{$name}' => ['type:drupal-library'],
-                $webroot .'/sites/all/modules/contrib/{$name}' => ['type:drupal-module'],
-                $webroot .'/sites/all/themes/contrib/{$name}' => ['type:drupal-theme'],
-                $webroot .'/sites/all/drush/{$name}' => ['type:drupal-drush'],
+                'vendor/wordpress' => ['type:wordpress-core'],
+                $webroot .'/wp-content/plugins/{$name}' => ['type:wordpress-plugin'],
+                $webroot .'/wp-content/themes/{$name}' => ['type:wordpress-theme']
             ];
         }
     }
