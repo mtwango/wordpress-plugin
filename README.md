@@ -99,6 +99,25 @@ For personal configs `link` must be defined
 }
 ```
 
+## WordPress updates
+
+If you want to manage your WordPress core, themes and plugins with Composer, you should disable automatic updates.
+You can use plugins to do that, for example [Easy Updates Manager](https://wordpress.org/plugins/stops-core-theme-and-plugin-updates/).
+Or you can either use included plugin `composer-plugin-no-updates` or following manual configuration:
+
+To **disable WordPress Core updates**, add following line in your `wp-config.php`:
+
+```php
+define( 'WP_AUTO_UPDATE_CORE', false );
+```
+
+To **disable plugin and theme updates**, you need to use filters in your theme's `functions.php` file:
+
+```php
+add_filter( 'auto_update_plugin', '__return_false' );
+add_filter( 'auto_update_theme', '__return_false' );
+```
+
 ## Development
 
 Install with dev dependencies:
