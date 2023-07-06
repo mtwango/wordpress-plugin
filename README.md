@@ -1,45 +1,40 @@
-# Mona Composer Plugin
+# Wordpress Composer Plugin
 
-[![Tests](https://github.com/druidfi/mona-plugin/actions/workflows/tests.yml/badge.svg)](https://github.com/druidfi/mona-plugin/actions/workflows/tests.yml)
+[![Tests](https://github.com/mtwango/wordpress-plugin/actions/workflows/tests.yml/badge.svg)](https://github.com/mtwango/wordpress-plugin/actions/workflows/tests.yml)
 
-Composer plugin to symlink paths to create Composer based Drupal 7 installation.
+Composer plugin to symlink paths to create Composer based WordPress installation.
 
 ## Install / update
 
 To install / update the latest stable version of this component, open a console and execute the following command:
 
 ```
-composer require druidfi/mona-plugin
-```
-
-### Note!
-
-If you for some reason must use Composer v1 and/or PHP < 7.3, you can require 1.x version of Mona Plugin:
-
-```
-composer require druidfi/mona-plugin:^1.4.0
+composer require mtwango/wordpress-plugin
 ```
 
 ## Includes
 
 This plugin will also require for you the following packages:
 
-- composer/installers:^2.0
+- composer/installers:^2.2
 - cweagans/composer-patches:^1.7
-- drush/drush:^8.4
 
 ## Usage
 
 ### Configuration
 
-Drupal repository must be defined:
+WordPress' plugins and themes repository must be defined:
 
 ```json
 {
     "repositories": [
         {
             "type": "composer",
-            "url": "https://packages.drupal.org/7"
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*",
+                "wpackagist-theme/*"
+            ]
         }
     ]
 }
@@ -50,14 +45,12 @@ Plugin default values (AKA you don't need to add these if not overriding):
 ```json
 {
     "extra": {
-        "mona-plugin": {
+        "wordpress-plugin": {
             "composer-exit-on-patch-failure": true,
             "installer-paths": {
-                "vendor/drupal": ["type:drupal-core"],
-                "${webroot}/sites/all/libraries/{$name}": ["type:drupal-library"],
-                "${webroot}/sites/all/modules/contrib/{$name}": ["type:drupal-module"],
-                "${webroot}/sites/all/themes/{$name}": ["type:drupal-theme"],
-                "${webroot}/sites/all/drush/{$name}": ["type:drupal-drush"]
+                "johnpbloch/wordpress-core": ["type:wordpress-core"],
+                "${webroot}/wp-content/plugins/{$name}": ["type:wordpress-plugin"],
+                "${webroot}/wp-content/themes/{$name}": ["type:wordpress-theme"]
             },
             "symlinks": {
             },
@@ -73,22 +66,23 @@ Plugin default values (AKA you don't need to add these if not overriding):
 
 ### Symlinking
 
-Create the symlinks to `extra.mona-plugin.symlinks` section.
+Create the symlinks to `extra.wordpress-plugin.symlinks` section.
 
-Set `symlinks-skip-missing-target` to true if we should not throw exception if target path doesn't exists
-Set `symlinks-absolute-path` to true if you want to create realpath symlinks
-Set `symlinks-throw-exception` to false if you dont want to break creating on some error while check symlinks
-Set `symlinks-force-create` to force unlink link if something already exists on link path
+- Set `symlinks-skip-missing-target` to true if we should not throw exception if target path doesn't exists
+- Set `symlinks-absolute-path` to true if you want to create realpath symlinks
+- Set `symlinks-throw-exception` to false if you don't want to break creating on some error while check symlinks
+- Set `symlinks-force-create` to force unlink link if something already exists on link path
 
 You can set personal configs for any symlink.
+
 For personal configs `link` must be defined
 
 ```json
 {
     "extra": {
-        "mona-plugin": {
+        "wordpress-plugin": {
             "symlinks": {
-                "vendor/woocommerce/flexslider": "public/sites/all/libraries/flexslider"
+                "vendor/namespace/must-use": "public/wp-content/mu-plugins/must-use"
             },
             "symlinks-force-create": false,
             "symlinks-skip-missing-target": false,
@@ -96,45 +90,6 @@ For personal configs `link` must be defined
             "symlinks-throw-exception": true
         }
     }
-}
-```
-
-### Adding library as a drupal-library
-
-If you need library to be installed to `sites/all/libraries`,
-
-you can list it as a Drupal library if it's found from [Packagist](https://packagist.org/):
-
-```json
-{
-    "extra": {
-        "mona-plugin": {
-            "libraries": [
-                "ckeditor/ckeditor"
-            ]
-        }
-     }
-}
-```
-
-or you can define a custom repository:
-
-```json
-{
-    "repositories": [
-        {
-            "type":"package",
-            "package": {
-                "name": "ckeditor/ckeditor",
-                "version": "4.1.2",
-                "dist": {
-                    "type": "zip",
-                    "url": "https://github.com/ckeditor/ckeditor-releases/archive/4.1.2/full.zip"
-                },
-                "type": "drupal-library"
-            }
-        }
-    ]
 }
 ```
 
@@ -154,8 +109,8 @@ vendor/bin/php-cs-fixer fix src
 
 ## Forked from
 
-This plugin is based on [ComposerSymlinks](https://github.com/somework/composer-symlinks) and modified to be used with
-Drupal 7 Composer based installations. Mona Composer Plugin is released under same license.
+This plugin is based on [Mona Composer Plugin](https://github.com/druidfi/mona-plugin) and modified to be used with
+WordPress Composer based installations. WordPress Composer Plugin is released under same license.
 
 ## License
 
