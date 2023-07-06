@@ -118,7 +118,7 @@ add_filter( 'auto_update_plugin', '__return_false' );
 add_filter( 'auto_update_theme', '__return_false' );
 ```
 
-## Development
+## Testing
 
 Install with dev dependencies:
 
@@ -126,10 +126,10 @@ Install with dev dependencies:
 composer install
 ```
 
-Run PHP CS Fixer:
+Run tests from root:
 
 ```
-vendor/bin/php-cs-fixer fix src
+./vendor/bin/phpcs src --standard=Drupal --colors
 ```
 
 ## Forked from

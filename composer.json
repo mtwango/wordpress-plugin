@@ -36,8 +36,14 @@
         "cweagans/composer-patches": "^1.7"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "@stable",
-        "composer/composer": "^2.5"
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "drupal/coder": "^8.3",
+        "phpcompatibility/php-compatibility": "dev-develop",
+        "phpmd/phpmd": "^2.13",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-deprecation-rules": "^1.1",
+        "phpstan/phpstan-strict-rules": "^1.5",
+        "vimeo/psalm": "^5.13"
     },
     "conflict": {
         "johnpbloch/wordpress-core": "<6.2"
@@ -47,7 +53,8 @@
     "config": {
         "allow-plugins": {
             "composer/installers": true,
-            "cweagans/composer-patches": true
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }
