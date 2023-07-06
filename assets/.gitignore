@@ -1,0 +1,15 @@
+# Wordpress Core.
+/wp-admin/
+/wp-content/index.php
+!/wp-content/plugins/
+/wp-content/plugins/*
+!/wp-content/themes/
+/wp-content/themes/*
+/wp-includes/
+/index.php
+/wp-*.php
+/xmlrpc.php
+
+# Exclude custom plugins and themes example.
+#!/wp-content/plugins/custom-plugin/
+#!/wp-content/themes/custom-theme/

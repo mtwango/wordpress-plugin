@@ -1,4 +1,4 @@
-# Wordpress Composer Plugin
+# WordPress Composer Plugin
 
 [![Tests](https://github.com/mtwango/wordpress-plugin/actions/workflows/tests.yml/badge.svg)](https://github.com/mtwango/wordpress-plugin/actions/workflows/tests.yml)
 
@@ -64,11 +64,17 @@ Plugin default values (AKA you don't need to add these if not overriding):
 }
 ```
 
+### .gitignore
+
+This plugin has example `.gitignore` included in `assets` folder, which ignores WordPress Core and by default
+all plugins. There is an example how to exclude custom plugins from `.gitignore`. You are free to copy it to your
+webroot or modify it and have it elsewhere.
+
 ### Symlinking
 
 Create the symlinks to `extra.wordpress-plugin.symlinks` section.
 
-- Set `symlinks-skip-missing-target` to true if we should not throw exception if target path doesn't exists
+- Set `symlinks-skip-missing-target` to true if we should not throw exception if target path doesn't exist
 - Set `symlinks-absolute-path` to true if you want to create realpath symlinks
 - Set `symlinks-throw-exception` to false if you don't want to break creating on some error while check symlinks
 - Set `symlinks-force-create` to force unlink link if something already exists on link path

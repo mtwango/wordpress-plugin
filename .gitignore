@@ -1,4 +1,4 @@
-### Composer
+# Composer
 composer.phar
 /vendor/
 .php_cs.cache
