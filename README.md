@@ -109,7 +109,7 @@ As WordPress core, it is intended to use package `johnpbloch/wordpress-core`
 
 If you want to manage your WordPress core, themes and plugins with Composer, you should disable automatic updates.
 You can use plugins to do that, for example [Easy Updates Manager](https://wordpress.org/plugins/stops-core-theme-and-plugin-updates/).
-Or you can either use included plugin `composer-plugin-no-updates` or following manual configuration:
+Or you can either use included plugin `composer-plugin-no-updates` (in _mu-plugins_ folder or in _plugins_ folder, if you want to be able to disable it) or following manual configuration:
 
 To **disable WordPress Core updates**, add following line in your `wp-config.php`:
 

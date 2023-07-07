@@ -1,10 +1,15 @@
 <?php
 /**
- * Plugin Name: Composer Plugin No Updates.
- * Description: Helper for Composer WordPress plugin to disable automatic updates.
- * Version:     1.0
- * Author:      Mtwango
- * Author URI:  https://github.com/mtwango/wordpress-plugin
+ * Plugin Name:       Composer Plugin No Updates
+ * Plugin URI:        https://github.com/mtwango/wordpress-plugin
+ * Description:       Helper for Composer WordPress plugin which disables automatic updates.
+ * Version:           1.0.0
+ * Requires at least: 6.2
+ * Author:            Mtwango
+ * Author URI:        https://github.com/mtwango
+ * License:           MIT
+ * License URI:       https://github.com/mtwango/wordpress-plugin/blob/main/LICENSE
+ * Text Domain:       composer-plugin-no-updates
  */
 
 // Disable WordPress Core updates.
