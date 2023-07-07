@@ -99,7 +99,13 @@ For personal configs `link` must be defined
 }
 ```
 
-## WordPress updates
+## WordPress
+
+### Core
+
+As WordPress core, it is intended to use package `johnpbloch/wordpress-core`
+
+### Updates
 
 If you want to manage your WordPress core, themes and plugins with Composer, you should disable automatic updates.
 You can use plugins to do that, for example [Easy Updates Manager](https://wordpress.org/plugins/stops-core-theme-and-plugin-updates/).

@@ -12,8 +12,8 @@
         }
     ],
     "require": {
-        "mtwango/wordpress-plugin": "*",
         "johnpbloch/wordpress-core": "^6.2",
+        "mtwango/wordpress-plugin": "*",
         "wpackagist-plugin/wordpress-seo": "^20.10",
         "wpackagist-theme/hello-elementor": "^2.8"
     },
