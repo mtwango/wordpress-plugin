@@ -30,27 +30,27 @@
         "class": "Mtwango\\Wordpress\\Plugin"
     },
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.2",
         "composer-plugin-api": "^2.3",
-        "composer/installers": "^2.2",
-        "cweagans/composer-patches": "^1.7"
+        "composer/installers": "2.3",
+        "cweagans/composer-patches": "^2.0"
     },
     "require-dev": {
-        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
         "drupal/coder": "^8.3",
         "phpcompatibility/php-compatibility": "dev-develop",
-        "phpmd/phpmd": "^2.13",
-        "phpstan/phpstan": "^1.10",
-        "phpstan/phpstan-deprecation-rules": "^1.1",
-        "phpstan/phpstan-strict-rules": "^1.5",
-        "vimeo/psalm": "^5.13"
+        "phpmd/phpmd": "^2.15",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "vimeo/psalm": "^6.15"
     },
     "conflict": {
-        "johnpbloch/wordpress-core": "<6.2"
+        "johnpbloch/wordpress-core": "<6.8"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
             "composer/installers": true,
             "cweagans/composer-patches": true,

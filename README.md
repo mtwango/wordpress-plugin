@@ -16,8 +16,8 @@ composer require mtwango/wordpress-plugin
 
 This plugin will also require for you the following packages:
 
-- composer/installers:^2.2
-- cweagans/composer-patches:^1.7
+- composer/installers:^2.3
+- cweagans/composer-patches:^2.0
 
 ## Usage
 
