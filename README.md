@@ -19,6 +19,8 @@ This plugin will also require for you the following packages:
 - composer/installers:^2.3
 - cweagans/composer-patches:^2.0
 
+And PHP version at least 8.3.
+
 ## Usage
 
 ### Configuration

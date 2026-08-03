@@ -12,10 +12,10 @@
         }
     ],
     "require": {
-        "johnpbloch/wordpress-core": "^6.2",
+        "johnpbloch/wordpress-core": "^7.0",
         "mtwango/wordpress-plugin": "*",
-        "wpackagist-plugin/wordpress-seo": "^20.10",
-        "wpackagist-theme/hello-elementor": "^2.8"
+        "wpackagist-plugin/wordpress-seo": "^20.13",
+        "wpackagist-theme/hello-elementor": "^2.9"
     },
     "repositories": [
         {
